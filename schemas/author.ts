@@ -1,6 +1,8 @@
 import { UserIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
+import socialsType from './socials'
+
 export default defineType({
   name: 'author',
   title: 'Author',
@@ -19,6 +21,17 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
       validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'bio',
+      title: 'Bio',
+      type: 'string',
+    },
+    {
+      name: 'socials',
+      title: 'Social Media',
+      type: 'reference',
+      to: [{ type: socialsType.name }],
     },
   ],
 })

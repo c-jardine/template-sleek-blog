@@ -1,22 +1,24 @@
+import { Box, Flex, Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import Container from '../../components/container'
-import Header from '../../components/header'
 import Layout from '../../components/layout'
-import MoreStories from '../../components/more-stories'
-import PostBody from '../../components/post-body'
-import PostHeader from '../../components/post-header'
-import PostTitle from '../../components/post-title'
-import SectionSeparator from '../../components/section-separator'
+import {
+  AuthorCard,
+  RecentPosts,
+  PostBody,
+  PostHeader,
+  PostTitle,
+} from '../../components/posts'
+import { AuthorSocials } from '../../components/posts/AuthorSocials'
 import { postQuery, postSlugsQuery, settingsQuery } from '../../lib/queries'
 import { urlForImage, usePreviewSubscription } from '../../lib/sanity'
 import { getClient, overlayDrafts } from '../../lib/sanity.server'
 import { PostProps } from '../../types'
 
 interface Props {
-  data: { post: PostProps; morePosts: any }
+  data: { post: PostProps; recentPosts: any }
   preview: any
   blogSettings: any
 }
@@ -31,7 +33,7 @@ export default function Post(props: Props) {
     initialData: initialData,
     enabled: preview && !!slug,
   })
-  const { post, morePosts } = data || {}
+  const { post, recentPosts } = data || {}
   const { title = 'Blog.' } = blogSettings || {}
 
   if (!router.isFallback && !slug) {
@@ -40,56 +42,77 @@ export default function Post(props: Props) {
 
   return (
     <Layout preview={preview}>
-      <Container>
-        <Header title={title} />
+      <Head>
+        <title>{`${post.title} | ${title}`}</title>
+        {post.coverImage?.asset?._ref && (
+          <meta
+            key="ogImage"
+            property="og:image"
+            content={urlForImage(post.coverImage)
+              .width(1200)
+              .height(627)
+              .fit('crop')
+              .url()}
+          />
+        )}
+      </Head>
+      <Box>
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
-          <>
-            <article>
-              <Head>
-                <title>{`${post.title} | ${title}`}</title>
-                {post.coverImage?.asset?._ref && (
-                  <meta
-                    key="ogImage"
-                    property="og:image"
-                    content={urlForImage(post.coverImage)
-                      .width(1200)
-                      .height(627)
-                      .fit('crop')
-                      .url()}
-                  />
-                )}
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                author={post.author}
-              />
-              <PostBody content={post.content} />
-            </article>
-            <SectionSeparator />
-            {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-          </>
+          <VStack spacing={28}>
+            <Grid
+              templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
+              maxW="6xl"
+              gap={8}
+              w="full"
+              mx="auto"
+            >
+              <GridItem
+                colSpan={{ base: 1, lg: 2 }}
+                maxW="4xl"
+                mx="auto"
+                bg="white"
+                py={16}
+                shadow="md"
+              >
+                <PostHeader
+                  title={post.title}
+                  coverImage={post.coverImage}
+                  date={post.date}
+                  author={post.author}
+                  category={post.category}
+                />
+                <PostBody content={post.content} />
+              </GridItem>
+              <GridItem as={Stack} spacing={16}>
+                <AuthorCard {...post.author} />
+                <AuthorSocials {...post.author} />
+              </GridItem>
+            </Grid>
+            <Box>
+              {recentPosts.length > 0 && <RecentPosts posts={recentPosts} />}
+            </Box>
+          </VStack>
         )}
-      </Container>
+      </Box>
     </Layout>
   )
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const { post, morePosts } = await getClient(preview).fetch(postQuery, {
+  const { post, recentPosts } = await getClient(preview).fetch(postQuery, {
     slug: params.slug,
   })
   const blogSettings = await getClient(preview).fetch(settingsQuery)
+  console.log(post)
 
   return {
     props: {
       preview,
       data: {
         post,
-        morePosts: overlayDrafts(morePosts),
+        recentPosts: overlayDrafts(recentPosts),
       },
       blogSettings,
     },

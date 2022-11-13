@@ -8,7 +8,8 @@ const postFields = groq`
   excerpt,
   coverImage,
   "slug": slug.current,
-  "author": author->{name, picture},
+  "author": author->{name, picture, bio, socials->{...}},
+  "category": category->{label}
 `
 
 export const settingsQuery = groq`*[_type == "settings"][0]{title}`
@@ -24,7 +25,7 @@ export const postQuery = groq`
     content,
     ${postFields}
   },
-  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+  "recentPosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...3] {
     content,
     ${postFields}
   }

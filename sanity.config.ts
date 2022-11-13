@@ -3,28 +3,28 @@
  */
 
 import { visionTool } from '@sanity/vision'
-import { createConfig, Slug } from 'sanity'
-import { deskTool } from 'sanity/desk'
+import { defineConfig, Slug } from 'sanity'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+import { deskTool } from 'sanity/desk'
 
-import { PostsPreview } from './components/Posts/PostsPreview'
+import { PostsPreview } from './components/posts/PostsPreview'
 import authorType from './schemas/author'
+import categoryType from './schemas/category'
 import postType from './schemas/post'
 import settingsType from './schemas/settings'
+import socialsType from './schemas/socials'
 
 // @TODO: update next-sanity/studio to automatically set this when needed
 const basePath = '/studio'
 
-export default createConfig({
+const config = defineConfig({
   basePath,
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  title:
-    process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE ||
-    'Next.js Blog with Sanity.io',
+  title: process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Blog Admin',
   schema: {
     // If you want more content types, you can add them to this array
-    types: [settingsType, postType, authorType],
+    types: [settingsType, postType, authorType, socialsType, categoryType],
   },
   plugins: [
     deskTool({
@@ -119,3 +119,5 @@ export default createConfig({
     },
   },
 })
+
+export default config

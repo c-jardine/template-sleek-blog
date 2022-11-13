@@ -1,25 +1,19 @@
+import { Box, VStack } from '@chakra-ui/react'
 import Head from 'next/head'
 
-import BlogHeader from '../components/blog-header'
-import Container from '../components/container'
-import HeroPost from '../components/hero-post'
-import IntroTemplate from '../components/intro-template'
+import { BlogHeader } from '../components/core'
 import Layout from '../components/layout'
-import MoreStories from '../components/more-stories'
+import { HeroPost, RecentPosts } from '../components/posts'
 import { indexQuery, settingsQuery } from '../lib/queries'
 import { usePreviewSubscription } from '../lib/sanity'
 import { getClient, overlayDrafts } from '../lib/sanity.server'
 
-export default function Index({
-  allPosts: initialAllPosts,
-  preview,
-  blogSettings,
-}) {
+const Index = ({ allPosts: initialAllPosts, preview, blogSettings }) => {
   const { data: allPosts } = usePreviewSubscription(indexQuery, {
     initialData: initialAllPosts,
     enabled: preview,
   })
-  const [heroPost, ...morePosts] = allPosts || []
+  const [heroPost, ...recentPosts] = allPosts || []
   const { title = 'Blog.' } = blogSettings || {}
 
   return (
@@ -28,7 +22,7 @@ export default function Index({
         <Head>
           <title>{title}</title>
         </Head>
-        <Container>
+        <VStack spacing={28} w="full" justifyContent="center">
           <BlogHeader title={title} />
           {heroPost && (
             <HeroPost
@@ -40,9 +34,9 @@ export default function Index({
               excerpt={heroPost.excerpt}
             />
           )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-        </Container>
-        <IntroTemplate />
+
+          {recentPosts.length > 0 && <RecentPosts posts={recentPosts} />}
+        </VStack>
       </Layout>
     </>
   )
@@ -53,6 +47,7 @@ export async function getStaticProps({ preview = false }) {
   if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
     const allPosts = overlayDrafts(await getClient(preview).fetch(indexQuery))
     const blogSettings = await getClient(preview).fetch(settingsQuery)
+    console.log(allPosts)
 
     return {
       props: { allPosts, preview, blogSettings },
@@ -67,3 +62,5 @@ export async function getStaticProps({ preview = false }) {
     revalidate: undefined,
   }
 }
+
+export default Index

@@ -2,6 +2,7 @@ import { BookIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
 
 import authorType from './author'
+import categoryType from './category'
 
 /**
  * This file is the schema definition for a post.
@@ -35,6 +36,13 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required(),
+    },
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: [{ type: categoryType.name }],
       validation: (Rule) => Rule.required(),
     },
     {
