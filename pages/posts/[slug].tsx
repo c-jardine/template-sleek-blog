@@ -1,111 +1,58 @@
-import { Box, Flex, Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
 import ErrorPage from 'next/error'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { PostPageContent } from '../../components/pages'
 
-import Layout from '../../components/layout'
-import {
-  AuthorCard,
-  RecentPosts,
-  PostBody,
-  PostHeader,
-  PostTitle,
-} from '../../components/posts'
-import { AuthorSocials } from '../../components/posts/AuthorSocials'
-import { postQuery, postSlugsQuery, settingsQuery } from '../../lib/queries'
-import { urlForImage, usePreviewSubscription } from '../../lib/sanity'
+import * as query from '../../lib/queries'
 import { getClient, overlayDrafts } from '../../lib/sanity.server'
-import { PostProps } from '../../types'
+import { PostPageProps } from '../../types'
 
-interface Props {
-  data: { post: PostProps; recentPosts: any }
-  preview: any
-  blogSettings: any
-}
-
-export default function Post(props: Props) {
-  const { data: initialData, preview, blogSettings } = props
+const Post = (props: PostPageProps) => {
   const router = useRouter()
+  const { data: initialData } = props
 
   const slug = initialData?.post?.slug
-  const { data } = usePreviewSubscription(postQuery, {
-    params: { slug },
-    initialData: initialData,
-    enabled: preview && !!slug,
-  })
-  const { post, recentPosts } = data || {}
-  const { title = 'Blog.' } = blogSettings || {}
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  return (
-    <Layout preview={preview}>
-      <Head>
-        <title>{`${post.title} | ${title}`}</title>
-        {post.coverImage?.asset?._ref && (
-          <meta
-            key="ogImage"
-            property="og:image"
-            content={urlForImage(post.coverImage)
-              .width(1200)
-              .height(627)
-              .fit('crop')
-              .url()}
-          />
-        )}
-      </Head>
-      <Box>
-        {router.isFallback ? (
-          <PostTitle>Loading…</PostTitle>
-        ) : (
-          <VStack spacing={28}>
-            <Grid
-              templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
-              maxW="6xl"
-              gap={8}
-              w="full"
-              mx="auto"
-            >
-              <GridItem
-                colSpan={{ base: 1, lg: 2 }}
-                maxW="4xl"
-                mx="auto"
-                bg="white"
-                py={16}
-                shadow="md"
-              >
-                <PostHeader
-                  title={post.title}
-                  coverImage={post.coverImage}
-                  date={post.date}
-                  author={post.author}
-                  category={post.category}
-                />
-                <PostBody content={post.content} />
-              </GridItem>
-              <GridItem as={Stack} spacing={16}>
-                <AuthorCard {...post.author} />
-                <AuthorSocials {...post.author} />
-              </GridItem>
-            </Grid>
-            <Box>
-              {recentPosts.length > 0 && <RecentPosts posts={recentPosts} />}
-            </Box>
-          </VStack>
-        )}
-      </Box>
-    </Layout>
-  )
+  return <PostPageContent {...props} />
 }
 
-export async function getStaticProps({ params, preview = false }) {
-  const { post, recentPosts } = await getClient(preview).fetch(postQuery, {
-    slug: params.slug,
-  })
-  const blogSettings = await getClient(preview).fetch(settingsQuery)
-  console.log(post)
+export const getStaticPaths = async () => {
+  const paths = await getClient(false).fetch(query.postSlugsQuery)
+  return {
+    paths: paths.map((slug: string) => ({ params: { slug } })),
+    fallback: true,
+  }
+}
+
+export const getStaticProps = async ({ params, preview = false }) => {
+  // Fetch requested post and the three most recent posts, excluding this one.
+  const { post, recentPosts } = await getClient(preview).fetch(
+    query.postQuery,
+    {
+      slug: params.slug,
+    }
+  )
+
+  // Fetch the blog settings for page metadata
+  // TODO: Can this be moved into context so it doesn't need fetched on every page?
+  const blogSettings = await getClient(preview).fetch(query.settingsQuery)
+
+  // Fetch the three most recent posts, excluding this one, by the author of this post.
+  const postsByAuthor = await getClient(preview).fetch(
+    query.postsByAuthorQuery,
+    {
+      slug: params.slug,
+      authorName: post.author.name,
+    }
+  )
+
+  // Fetch the list of categories and count the number of articles under each.
+  const countPostsByCategory = await getClient(preview).fetch(
+    query.countPostsByCategory
+  )
 
   return {
     props: {
@@ -115,16 +62,12 @@ export async function getStaticProps({ params, preview = false }) {
         recentPosts: overlayDrafts(recentPosts),
       },
       blogSettings,
+      postsByAuthor,
+      countPostsByCategory,
     },
     // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
     revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
   }
 }
 
-export async function getStaticPaths() {
-  const paths = await getClient(false).fetch(postSlugsQuery)
-  return {
-    paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
-  }
-}
+export default Post

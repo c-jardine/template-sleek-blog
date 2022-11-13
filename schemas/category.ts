@@ -20,6 +20,16 @@ export default defineType({
   type: 'document',
   fields: [
     {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'label',
+        maxLength: 32,
+      },
+      validation: (Rule) => Rule.required(),
+    },
+    {
       name: 'label',
       title: 'Label',
       type: 'string',

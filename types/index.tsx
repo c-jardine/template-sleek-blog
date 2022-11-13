@@ -1,5 +1,6 @@
 export interface AuthorProps {
   name: string
+  slug: { current: string }
   picture: any
   bio: string
   socials: {
@@ -23,4 +24,18 @@ export interface PostProps {
 
 export interface CategoryProps {
   label: string
+}
+
+export interface PostPageProps {
+  data: { post: PostProps; recentPosts: any }
+  preview: any
+  blogSettings: any
+  postsByAuthor: any
+  countPostsByCategory: any
+}
+
+export interface AuthorPageProps {
+  data: { slug: string; author: AuthorProps }
+  preview: any
+  postsByAuthor: PostProps[]
 }

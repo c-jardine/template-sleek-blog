@@ -17,11 +17,8 @@ import { PostProps } from '../../../types/index'
 import { Button } from '../Button'
 
 const Card = (props: PostProps) => {
-  React.useEffect(() => {
-    console.log(props)
-  }, [props])
   return (
-    <VStack spacing={0} maxW="md" bg="white" shadow="md">
+    <VStack spacing={0} w="full" bg="white" shadow="md">
       <Box
         as={ChakraLink}
         href={`/posts/${props.slug}`}
@@ -72,12 +69,16 @@ const Card = (props: PostProps) => {
             {format(new Date(props.date), 'MMMM do, yyyy')}
           </chakra.span>
           /
-          <chakra.span
-            as={ChakraLink}
-            textStyle="link"
-            _hover={{ color: 'black' }}
-          >
-            by {props.author.name}
+          <chakra.span>
+            by{' '}
+            <chakra.span
+              as={ChakraLink}
+              href={`/author/${props.author.slug}`}
+              textStyle="link"
+              _hover={{ color: 'black' }}
+            >
+              {props.author.name}
+            </chakra.span>
           </chakra.span>
         </Text>
         <Text color="blackAlpha.700" fontSize="sm">

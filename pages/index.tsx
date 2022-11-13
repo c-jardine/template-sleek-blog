@@ -47,7 +47,6 @@ export async function getStaticProps({ preview = false }) {
   if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
     const allPosts = overlayDrafts(await getClient(preview).fetch(indexQuery))
     const blogSettings = await getClient(preview).fetch(settingsQuery)
-    console.log(allPosts)
 
     return {
       props: { allPosts, preview, blogSettings },

@@ -8,7 +8,7 @@ const postFields = groq`
   excerpt,
   coverImage,
   "slug": slug.current,
-  "author": author->{name, picture, bio, socials->{...}},
+  "author": author->{name, slug, picture, bio, socials->{...}},
   "category": category->{label}
 `
 
@@ -39,4 +39,24 @@ export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug][0] {
   ${postFields}
 }
+`
+
+export const postsByAuthorQuery = groq`
+*[_type == "post" && slug.current != $slug && author._ref in *[_type=="author" && name == $authorName ]._id][0...3] {
+    date, title, slug, coverImage,
+      "category": category->{label}
+  }
+`
+
+export const authorPostsQuery = groq`
+*[_type == "post" && author._ref in *[_type=="author" && slug.current == $slug ]._id] {
+    ${postFields}
+  }
+`
+
+export const countPostsByCategory = groq`
+*[_type == "category"] {
+    label,
+      "posts": count(*[_type == "post" && category._ref == ^._id])
+  }
 `

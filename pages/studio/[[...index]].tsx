@@ -7,10 +7,21 @@
  * https://github.com/sanity-io/next-sanity
  */
 
+import { Box } from '@chakra-ui/react'
 import { NextStudio } from 'next-sanity/studio'
 
 import config from '../../sanity.config'
 
 export default function StudioPage() {
-  return <NextStudio config={config} />
+  return (
+    <Box
+      position="absolute"
+      top={16}
+      w="full"
+      h="calc(100vh - 4rem)"
+      zIndex={0}
+    >
+      <NextStudio config={config} />
+    </Box>
+  )
 }
