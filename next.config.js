@@ -11,6 +11,11 @@ module.exports = {
         destination: '/author/:slug/1',
         permanent: true,
       },
+      {
+        source: '/posts',
+        destination: '/posts/1',
+        permanent: true,
+      },
     ]
   },
 

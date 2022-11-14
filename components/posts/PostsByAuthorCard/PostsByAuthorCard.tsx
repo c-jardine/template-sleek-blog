@@ -29,7 +29,12 @@ const PostsByAuthorCard = (props: { posts: PostProps[]; author: string }) => {
             />
           </Box>
           <Box>
-            <Text fontWeight="bold" color="black" letterSpacing={1}>
+            <Text
+              fontWeight="bold"
+              color="black"
+              letterSpacing={1}
+              lineHeight={1.5}
+            >
               {post.title}
             </Text>
             <Text fontSize="xs">
