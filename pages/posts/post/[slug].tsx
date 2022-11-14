@@ -1,12 +1,12 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
-import { PostPageContent } from '../../components/pages'
+import { PostPageContent } from '../../../components/pages'
 
-import * as query from '../../lib/queries'
-import { getClient, overlayDrafts } from '../../lib/sanity.server'
-import { PostPageProps } from '../../types'
+import * as query from '../../../lib/queries'
+import { getClient, overlayDrafts } from '../../../lib/sanity.server'
+import { PostPageProps } from '../../../types'
 
-const Post = (props: PostPageProps) => {
+const PostPage = (props: PostPageProps) => {
   const router = useRouter()
   const { data: initialData } = props
 
@@ -70,4 +70,4 @@ export const getStaticProps = async ({ params, preview = false }) => {
   }
 }
 
-export default Post
+export default PostPage

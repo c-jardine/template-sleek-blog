@@ -1,7 +1,6 @@
 import {
   Box,
   chakra,
-  Divider,
   Flex,
   Image,
   Link as ChakraLink,
@@ -10,8 +9,6 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { format } from 'date-fns'
-import Link from 'next/link'
-import React from 'react'
 
 import { PostProps } from '../../../types/index'
 import { Button } from '../Button'
@@ -21,7 +18,7 @@ const Card = (props: PostProps) => {
     <VStack spacing={0} w="full" bg="white" shadow="md">
       <Box
         as={ChakraLink}
-        href={`/posts/${props.slug}`}
+        href={`/posts/post/${props.slug}`}
         w="full"
         maxH={props.isHero ? 'xl' : 'lg'}
         overflow="hidden"
@@ -45,6 +42,7 @@ const Card = (props: PostProps) => {
       >
         <Stack>
           <Text
+            as={ChakraLink}
             color="brand.600"
             borderBottom="1px solid"
             borderColor="brand.500"
@@ -52,12 +50,13 @@ const Card = (props: PostProps) => {
             fontSize="sm"
             w="fit-content"
             letterSpacing={1}
+            textStyle="link"
           >
             {props.category.label}
           </Text>
           <chakra.h3
             as={ChakraLink}
-            href={`/posts/${props.slug}`}
+            href={`/posts/post/${props.slug}`}
             textStyle="link"
             fontSize={props.isHero ? '4xl' : '2xl'}
             fontWeight="semibold"
@@ -95,7 +94,7 @@ const Card = (props: PostProps) => {
           w="full"
           pt={8}
         >
-          <Button href={`/posts/${props.slug}`} variant="light">
+          <Button href={`/posts/post/${props.slug}`} variant="light">
             Read more
           </Button>
         </Flex>

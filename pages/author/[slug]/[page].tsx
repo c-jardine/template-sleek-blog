@@ -63,9 +63,6 @@ const AuthorPage = (props: AuthorPageProps) => {
             )}
           </GridItem>
         </Grid>
-        {/* <Box>
-          {recentPosts.length > 0 && <RecentPosts posts={recentPosts} />}
-        </Box> */}
       </VStack>
     </Layout>
   )
@@ -114,7 +111,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const totalPosts = await getClient(false).fetch(query.countPostsByAuthor, {
     slug: params.slug,
   })
-  const totalPages = totalPosts / RESULTS_PER_PAGE
+  const totalPages = Math.ceil(totalPosts / RESULTS_PER_PAGE)
 
   const start = (params.page - 1) * RESULTS_PER_PAGE
   const end = start + RESULTS_PER_PAGE
@@ -137,7 +134,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
       blog: blogSettings,
       categories,
       currentPage: params.page,
-      totalPages: Math.ceil(totalPages),
+      totalPages,
     },
     // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
     revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,

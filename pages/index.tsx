@@ -1,9 +1,10 @@
-import { Box, VStack } from '@chakra-ui/react'
+import { Box, Heading, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react'
+import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight'
 import Head from 'next/head'
 
 import { Card } from '../components/core'
 import Layout from '../components/layout'
-import { RecentPosts } from '../components/posts'
+import { Posts } from '../components/posts'
 import { indexQuery, settingsQuery } from '../lib/queries'
 import { urlForImage, usePreviewSubscription } from '../lib/sanity'
 import { getClient, overlayDrafts } from '../lib/sanity.server'
@@ -22,7 +23,13 @@ const Index = ({ allPosts: initialAllPosts, preview, blogSettings }) => {
         <Head>
           <title>{title}</title>
         </Head>
-        <VStack spacing={28} w="full" justifyContent="center">
+        <VStack
+          spacing={28}
+          w="full"
+          maxW="8xl"
+          mx="auto"
+          justifyContent="center"
+        >
           {heroPost && (
             <Box maxW="6xl" w="full" px={4}>
               <Card
@@ -31,17 +38,26 @@ const Index = ({ allPosts: initialAllPosts, preview, blogSettings }) => {
                 coverImage={urlForImage(heroPost.coverImage)}
               />
             </Box>
-            // <HeroPost
-            //   title={heroPost.title}
-            //   coverImage={heroPost.coverImage}
-            //   date={heroPost.date}
-            //   author={heroPost.author}
-            //   slug={heroPost.slug}
-            //   excerpt={heroPost.excerpt}
-            // />
           )}
-
-          {recentPosts.length > 0 && <RecentPosts posts={recentPosts} />}
+          <Stack spacing={16}>
+            <Heading textStyle={['h2', 'gradient']}>Recent posts</Heading>
+            {recentPosts.length > 0 && <Posts posts={recentPosts} />}
+            <Link
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              gap={2}
+              w="fit-content"
+              mt={{ base: 16 }}
+              role="group"
+              href="/posts"
+            >
+              <Text textStyle="link" variant="upperWide" color="black">
+                View all
+              </Text>
+              <Icon as={BsArrowRight} h={5} w={5} />
+            </Link>
+          </Stack>
         </VStack>
       </Layout>
     </>

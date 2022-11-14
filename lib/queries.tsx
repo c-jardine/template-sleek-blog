@@ -19,6 +19,16 @@ export const indexQuery = groq`
   ${postFields}
 }`
 
+export const allPostsQuery = groq`
+*[_type == "post"] | order(date desc, _updatedAt desc) [$start...$end] {
+  content,
+  ${postFields}
+}`
+
+export const countAllPostsQuery = groq`
+count(*[_type == "post"])
+`
+
 export const postQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {

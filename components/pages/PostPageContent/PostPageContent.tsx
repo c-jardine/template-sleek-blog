@@ -13,7 +13,7 @@ import {
   PostHeader,
   PostsByAuthorCard,
   PostTitle,
-  RecentPosts,
+  Posts,
 } from '../../posts'
 
 const PostPageContent = (props: PostPageProps) => {
@@ -85,9 +85,7 @@ const PostPageContent = (props: PostPageProps) => {
                 <CategoryPostsCard posts={props.countPostsByCategory} />
               </GridItem>
             </Grid>
-            <Box>
-              {recentPosts.length > 0 && <RecentPosts posts={recentPosts} />}
-            </Box>
+            <Box>{recentPosts.length > 0 && <Posts posts={recentPosts} />}</Box>
           </VStack>
         )}
       </Box>
