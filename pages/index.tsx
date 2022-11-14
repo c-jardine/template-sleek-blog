@@ -1,11 +1,11 @@
 import { Box, VStack } from '@chakra-ui/react'
 import Head from 'next/head'
 
-import { BlogHeader } from '../components/core'
+import { Card } from '../components/core'
 import Layout from '../components/layout'
-import { HeroPost, RecentPosts } from '../components/posts'
+import { RecentPosts } from '../components/posts'
 import { indexQuery, settingsQuery } from '../lib/queries'
-import { usePreviewSubscription } from '../lib/sanity'
+import { urlForImage, usePreviewSubscription } from '../lib/sanity'
 import { getClient, overlayDrafts } from '../lib/sanity.server'
 
 const Index = ({ allPosts: initialAllPosts, preview, blogSettings }) => {
@@ -23,16 +23,22 @@ const Index = ({ allPosts: initialAllPosts, preview, blogSettings }) => {
           <title>{title}</title>
         </Head>
         <VStack spacing={28} w="full" justifyContent="center">
-          <BlogHeader title={title} />
           {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
+            <Box maxW="6xl" w="full" px={4}>
+              <Card
+                {...heroPost}
+                isHero
+                coverImage={urlForImage(heroPost.coverImage)}
+              />
+            </Box>
+            // <HeroPost
+            //   title={heroPost.title}
+            //   coverImage={heroPost.coverImage}
+            //   date={heroPost.date}
+            //   author={heroPost.author}
+            //   slug={heroPost.slug}
+            //   excerpt={heroPost.excerpt}
+            // />
           )}
 
           {recentPosts.length > 0 && <RecentPosts posts={recentPosts} />}

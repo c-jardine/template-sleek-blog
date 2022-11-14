@@ -20,6 +20,7 @@ export interface PostProps {
   slug?: string
   content?: any
   category: CategoryProps
+  isHero?: boolean
 }
 
 export interface CategoryProps {
@@ -41,4 +42,6 @@ export interface AuthorPageProps {
   posts: PostProps[]
   blog: any
   categories: any
+  currentPage: number
+  totalPages: number
 }

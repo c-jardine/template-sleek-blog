@@ -7,34 +7,25 @@ import { getClient } from '../../../lib/sanity.server'
 import * as query from '../../../lib/queries'
 import useSWR from 'swr'
 
-const AuthorPosts = (props: { preview: any; slug: string }) => {
-  const [page, setPage] = React.useState(0)
-  const { data, error } = useSWR(query.authorPostsQuery, (q) =>
-    getClient(props.preview).fetch(q, {
-      slug: props.slug,
-      start: page * 1,
-      end: page * 1 + 1,
-    })
-  )
-
-  const handleNextPage = () => {
-    setPage(page + 1)
-  }
-
-  const handlePrevPage = () => {
-    page !== 0 && setPage(page - 1)
-  }
-
+const AuthorPosts = (props: {
+  preview: any
+  slug: string
+  posts: PostProps[]
+}) => {
   return (
     <>
-      <Grid templateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={4}>
-        {!data || error ? (
+      <Grid
+        templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+        columnGap={4}
+        rowGap={16}
+      >
+        {!props.posts ? (
           <>
             <CardSkeleton />
             <CardSkeleton />
           </>
         ) : (
-          data?.map((post, index) => (
+          props.posts?.map((post, index) => (
             <Card
               key={index}
               {...post}
@@ -44,12 +35,12 @@ const AuthorPosts = (props: { preview: any; slug: string }) => {
         )}
       </Grid>
       <HStack>
-        <Button onClick={handlePrevPage}>
+        {/* <Button onClick={handlePrevPage}>
           <Text>Previous</Text>
-        </Button>
-        <Button onClick={handleNextPage}>
+        </Button> */}
+        {/* <Button onClick={handleNextPage}>
           <Text>Next</Text>
-        </Button>
+        </Button> */}
       </HStack>
     </>
   )

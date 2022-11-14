@@ -1,11 +1,12 @@
-import { Box, Heading, Stack } from '@chakra-ui/react'
+import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight'
+import { chakra, Box, Heading, Stack, Text, Icon, Link } from '@chakra-ui/react'
 import { urlForImage } from '../../../lib/sanity'
 import { PostProps } from '../../../types'
 import { Card } from '../../core'
 
 const RecentPosts = ({ posts }: { posts: PostProps[] }) => {
   return (
-    <Box maxW="8xl" w="full" mx="auto" px={{ base: 4, md: 8 }}>
+    <Box maxW="8xl" w="full" mx="auto" px={4}>
       <Heading textStyle={['h2', 'gradient']} mb={16}>
         Recent posts
       </Heading>
@@ -18,6 +19,20 @@ const RecentPosts = ({ posts }: { posts: PostProps[] }) => {
           />
         ))}
       </Stack>
+      <Link
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        gap={2}
+        w="fit-content"
+        mt={{ base: 16 }}
+        role="group"
+      >
+        <Text textStyle="link" variant="upperWide" color="black">
+          View all
+        </Text>
+        <Icon as={BsArrowRight} h={5} w={5} />
+      </Link>
     </Box>
   )
 }

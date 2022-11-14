@@ -1,4 +1,4 @@
-import { Box, chakra, Flex, Link } from '@chakra-ui/react'
+import { Box, chakra, Flex, Link, Link as ChakraLink } from '@chakra-ui/react'
 import React from 'react'
 
 const Button = (props: {
@@ -8,6 +8,8 @@ const Button = (props: {
 }) => {
   return (
     <Box
+      as={ChakraLink}
+      href={props.href}
       bgGradient="linear(to-br, purple.400, brand.400)"
       h={12}
       style={{ padding: 1 }}
@@ -25,7 +27,6 @@ const Button = (props: {
         h="full"
         lineHeight={1.18}
         alignItems="center"
-        as={Link}
         textTransform="uppercase"
         letterSpacing={2}
         fontSize="sm"

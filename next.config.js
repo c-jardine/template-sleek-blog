@@ -3,6 +3,17 @@ module.exports = {
   // @TODO figure out why the swc minifier breaks preview mode
   swcMinify: false,
 
+  redirects: async () => {
+    return [
+      // Redirects unpaginated author url to the first paginated result.
+      {
+        source: '/author/:slug',
+        destination: '/author/:slug/1',
+        permanent: true,
+      },
+    ]
+  },
+
   images: {
     remotePatterns: [
       { hostname: 'cdn.sanity.io' },

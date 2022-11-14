@@ -15,7 +15,7 @@ const postFields = groq`
 export const settingsQuery = groq`*[_type == "settings"][0]{title}`
 
 export const indexQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc) {
+*[_type == "post"] | order(date desc, _updatedAt desc)[0...4] {
   ${postFields}
 }`
 
@@ -35,6 +35,14 @@ export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
 `
 
+export const authorSlugsQuery = groq`
+*[_type == "author" && defined(slug.current)][].slug.current
+`
+
+export const countPostsByAuthor = groq`
+count(*[_type == "post" && author._ref in *[_type=="author" && slug.current == $slug ]._id])
+`
+
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug][0] {
   ${postFields}
@@ -49,7 +57,7 @@ export const postsByAuthorQuery = groq`
 `
 
 export const authorPostsQuery = groq`
-*[_type == "post" && author._ref in *[_type=="author" && slug.current == $slug ]._id][$start...$end] {
+*[_type == "post" && author._ref in *[_type=="author" && slug.current == $slug ]._id] | order(date desc) [$start...$end] {
     ${postFields}
   }
 `
