@@ -3,7 +3,7 @@ import React from 'react'
 
 const Button = (props: {
   variant?: 'light' | 'dark'
-  href: string
+  href?: string
   children: string | React.ReactNode
 }) => {
   return (

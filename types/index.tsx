@@ -35,7 +35,10 @@ export interface PostPageProps {
 }
 
 export interface AuthorPageProps {
-  data: { slug: string; author: AuthorProps }
   preview: any
-  postsByAuthor: PostProps[]
+  slug: string
+  author: AuthorProps
+  posts: PostProps[]
+  blog: any
+  categories: any
 }

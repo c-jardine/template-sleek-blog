@@ -49,7 +49,7 @@ export const postsByAuthorQuery = groq`
 `
 
 export const authorPostsQuery = groq`
-*[_type == "post" && author._ref in *[_type=="author" && slug.current == $slug ]._id] {
+*[_type == "post" && author._ref in *[_type=="author" && slug.current == $slug ]._id][$start...$end] {
     ${postFields}
   }
 `

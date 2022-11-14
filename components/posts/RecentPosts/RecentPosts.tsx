@@ -5,7 +5,7 @@ import { Card } from '../../core'
 
 const RecentPosts = ({ posts }: { posts: PostProps[] }) => {
   return (
-    <Box maxW="8xl" w="full" mx="auto">
+    <Box maxW="8xl" w="full" mx="auto" px={{ base: 4, md: 8 }}>
       <Heading textStyle={['h2', 'gradient']} mb={16}>
         Recent posts
       </Heading>

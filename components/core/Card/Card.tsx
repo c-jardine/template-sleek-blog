@@ -73,7 +73,7 @@ const Card = (props: PostProps) => {
             by{' '}
             <chakra.span
               as={ChakraLink}
-              href={`/author/${props.author.slug}`}
+              href={`/author/${props.author.slug.current}`}
               textStyle="link"
               _hover={{ color: 'black' }}
             >
