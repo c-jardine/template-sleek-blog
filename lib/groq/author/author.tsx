@@ -1,8 +1,6 @@
 import { groq } from 'next-sanity'
 import { postFields } from '../post'
 
-
-
 export const countPostsByAuthor = groq`
 count(*[_type == "post" && author._ref in *[_type=="author" && slug.current == $slug ]._id])
 `

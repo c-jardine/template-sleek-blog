@@ -55,10 +55,7 @@ const HomePage = (props: HomePageProps) => {
               <Card
                 {...featuredPost}
                 isHero
-                coverImage={urlForImage(featuredPost.coverImage)
-                  .width(1920)
-                  .height(1080)
-                  .fit('crop')}
+                coverImage={featuredPost.coverImage}
               />
             </Box>
           )}

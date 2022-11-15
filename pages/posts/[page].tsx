@@ -4,41 +4,40 @@ import { Pagination } from '../../components/core'
 import Layout from '../../components/layout'
 import { Posts } from '../../components/posts'
 import {
-  blogSettingsQuery,
   countAllPostsQuery,
   countPostsByCategory,
-  postsQuery,
+  postsPageQuery,
 } from '../../lib/groq'
-import { urlForImage } from '../../lib/sanity'
 import { getClient } from '../../lib/sanity.server'
 
 const RESULTS_PER_PAGE = 6
 
 const PostsPage = (props) => {
-  const { preview, allPosts, currentPage, totalPages, blogSettings } = props
+  const { slug, preview, blogSettings, posts, currentPage, totalPages } = props
+
   return (
     <>
       <NextSeo
         title="Posts"
-        description={allPosts[0].excerpt}
-        canonical={blogSettings.url}
+        // description={featuredPost.excerpt}
+        // canonical={blogSettings.url}
         openGraph={{
-          url: blogSettings.url,
+          // url: blogSettings.url,
           title: `Posts | ${blogSettings.title}`,
-          description: allPosts[0].excerpt,
-          images: [
-            {
-              url: urlForImage(allPosts[0].coverImage)
-                .width(1200)
-                .height(627)
-                .fit('crop')
-                .url(),
-              width: 900,
-              height: 800,
-              alt: 'Share image',
-              type: 'image/jpeg',
-            },
-          ],
+          // description: featuredPost.excerpt,
+          // images: [
+          //   {
+          //     url: urlForImage(featuredPost.coverImage)
+          //       .width(1200)
+          //       .height(627)
+          //       .fit('crop')
+          //       .url(),
+          //     width: 900,
+          //     height: 800,
+          //     alt: 'Share image',
+          //     type: 'image/jpeg',
+          //   },
+          // ],
           siteName: blogSettings.title,
         }}
         twitter={{
@@ -56,7 +55,7 @@ const PostsPage = (props) => {
         >
           <Stack spacing={16}>
             <Heading textStyle={['h2', 'gradient']}>All posts</Heading>
-            {allPosts.length > 0 && <Posts posts={allPosts} />}
+            {posts.length > 0 && <Posts posts={posts} />}
           </Stack>
           <Pagination
             currentPage={currentPage}
@@ -85,7 +84,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: totalPagesArray,
-    fallback: true,
+    fallback: false,
   }
 }
 
@@ -97,14 +96,13 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const start = (params.page - 1) * RESULTS_PER_PAGE
   const end = start + RESULTS_PER_PAGE
 
-  const posts = await getClient(preview).fetch(postsQuery, {
-    start,
-    end,
-  })
-
-  // Fetch the blog settings for page metadata
-  // TODO: Can this be moved into context so it doesn't need fetched on every page?
-  const blogSettings = await getClient(preview).fetch(blogSettingsQuery)
+  const { blogSettings, posts } = await getClient(preview).fetch(
+    postsPageQuery,
+    {
+      start,
+      end,
+    }
+  )
 
   // Fetch the list of categories and count the number of articles under each.
   const numberOfPostsInCategory = await getClient(preview).fetch(
@@ -114,8 +112,8 @@ export const getStaticProps = async ({ params, preview = false }) => {
   return {
     props: {
       preview,
-      allPosts: posts,
       blogSettings,
+      posts,
       numberOfPostsInCategory,
       currentPage: params.page,
       totalPages,

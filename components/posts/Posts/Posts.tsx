@@ -12,11 +12,12 @@ const Posts = ({ posts }: { posts: PostProps[] }) => {
         rowGap={{ base: 16 }}
         columnGap={8}
       >
-        {posts.map((post) => (
+        {posts?.map((post, index) => (
           <Card
             {...post}
-            key={post.slug}
-            coverImage={urlForImage(post.coverImage)}
+            // key={post?.slug?.current}
+            key={index}
+            coverImage={post?.coverImage}
           />
         ))}
       </SimpleGrid>

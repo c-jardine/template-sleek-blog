@@ -1,1 +1,1 @@
-export { default as AuthorPosts } from './AuthorPosts';
+export { default as AuthorPosts } from './AuthorPosts'

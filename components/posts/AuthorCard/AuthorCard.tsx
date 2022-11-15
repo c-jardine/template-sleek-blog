@@ -4,6 +4,7 @@ import { AuthorProps } from '../../../types'
 import { SectionSeparator } from '../../core'
 
 const AuthorCard = (props: AuthorProps) => {
+  const { picture, name, bio } = props || {}
   return (
     <Stack bg="white" w="full" shadow="md" p={8} spacing={8}>
       <Text
@@ -19,7 +20,7 @@ const AuthorCard = (props: AuthorProps) => {
       <SectionSeparator />
       <Box h={52} overflow="hidden">
         <Image
-          src={urlForImage(props.picture).url()}
+          src={picture?.asset?._ref && urlForImage(picture).url()}
           alt="Author image"
           w="full"
           maxH={52}
@@ -35,10 +36,10 @@ const AuthorCard = (props: AuthorProps) => {
           textAlign="center"
           letterSpacing={2}
         >
-          {props.name}
+          {name}
         </Text>
         <Text fontSize="sm" textAlign="center">
-          {props.bio ||
+          {bio ||
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti minima recusandae facilis in provident molestiae. Minima amet consectetur elit.'}
         </Text>
       </Stack>

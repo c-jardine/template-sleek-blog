@@ -1,5 +1,5 @@
 import { Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
-import ErrorPage from 'next/error'
+import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 import { Pagination } from '../../../components/core'
 import Layout from '../../../components/layout'
@@ -14,10 +14,9 @@ import {
   authorSlugsQuery,
   countPostsByAuthor,
 } from '../../../lib/groq'
+import { urlForImage } from '../../../lib/sanity'
 import { getClient } from '../../../lib/sanity.server'
 import { AuthorPageProps } from '../../../types'
-import { NextSeo } from 'next-seo'
-import { urlForImage } from '../../../lib/sanity'
 
 const RESULTS_PER_PAGE = 4
 
@@ -35,11 +34,7 @@ const AuthorPage = (props: AuthorPageProps) => {
     totalPages,
   } = props
 
-  const [firstName, lastName] = author.name.split(' ')
-
-  if (!router.isFallback && !slug) {
-    return <ErrorPage statusCode={404} />
-  }
+  const [firstName, lastName] = author?.name.split(' ')
 
   return (
     <>
@@ -86,11 +81,6 @@ const AuthorPage = (props: AuthorPageProps) => {
           >
             <GridItem colSpan={{ base: 1, lg: 2 }}>
               <VStack spacing={28}>
-                {/* {!author ? (
-                <AuthorHeaderCardSkeleton />
-              ) : (
-                <AuthorHeaderCard {...author} />
-              )} */}
                 <Stack spacing={8}>
                   <AuthorPosts preview={preview} posts={posts} />
                   <Pagination
@@ -146,7 +136,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   }
 }
 

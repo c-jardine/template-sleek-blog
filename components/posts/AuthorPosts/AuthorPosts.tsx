@@ -4,6 +4,7 @@ import { PostProps } from '../../../types'
 import { Card, CardSkeleton } from '../../core'
 
 const AuthorPosts = (props: { preview: any; posts: PostProps[] }) => {
+  const { preview, posts } = props || {}
   return (
     <>
       <Grid
@@ -11,29 +12,18 @@ const AuthorPosts = (props: { preview: any; posts: PostProps[] }) => {
         columnGap={4}
         rowGap={16}
       >
-        {!props.posts ? (
+        {!posts ? (
           <>
             <CardSkeleton />
             <CardSkeleton />
           </>
         ) : (
           props.posts?.map((post, index) => (
-            <Card
-              key={index}
-              {...post}
-              coverImage={urlForImage(post.coverImage).url()}
-            />
+            <Card key={index} {...post} coverImage={post.coverImage} />
           ))
         )}
       </Grid>
-      <HStack>
-        {/* <Button onClick={handlePrevPage}>
-          <Text>Previous</Text>
-        </Button> */}
-        {/* <Button onClick={handleNextPage}>
-          <Text>Next</Text>
-        </Button> */}
-      </HStack>
+      <HStack></HStack>
     </>
   )
 }

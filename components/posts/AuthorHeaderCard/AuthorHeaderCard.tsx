@@ -16,6 +16,7 @@ import { AuthorProps } from '../../../types'
 import { SectionSeparator } from '../../core'
 
 const AuthorHeaderCard = (props: AuthorProps) => {
+  const { picture, name, bio, socials } = props || {}
   return (
     <Grid
       templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
@@ -25,10 +26,10 @@ const AuthorHeaderCard = (props: AuthorProps) => {
       shadow="md"
     >
       <GridItem overflow="hidden">
-        {props.picture && (
+        {picture && (
           <Image
-            src={urlForImage(props.picture).url()}
-            alt={`Photo of the author, ${props.name}`}
+            src={picture?.asset?._ref && urlForImage(picture).url()}
+            alt={`Photo of the author, ${name}`}
             objectFit="cover"
           />
         )}
@@ -54,14 +55,14 @@ const AuthorHeaderCard = (props: AuthorProps) => {
               fontWeight="bold"
               letterSpacing={2}
             >
-              {props.name}
+              {name}
             </Text>
-            <Text>{props.bio}</Text>
+            <Text>{bio}</Text>
           </Stack>
           <HStack spacing={4} justifyContent="flex-end">
-            {props.socials?.facebook && (
+            {socials?.facebook && (
               <Link
-                href={props.socials?.facebook}
+                href={socials?.facebook}
                 target="_blank"
                 rel="noreferrer"
                 bg="blackAlpha.100"
@@ -74,9 +75,9 @@ const AuthorHeaderCard = (props: AuthorProps) => {
                 <FaFacebookF />
               </Link>
             )}
-            {props.socials?.twitter && (
+            {socials?.twitter && (
               <Link
-                href={props.socials?.twitter}
+                href={socials?.twitter}
                 target="_blank"
                 rel="noreferrer"
                 bg="blackAlpha.100"
@@ -89,9 +90,9 @@ const AuthorHeaderCard = (props: AuthorProps) => {
                 <FaTwitter />
               </Link>
             )}
-            {props.socials?.instagram && (
+            {socials?.instagram && (
               <Link
-                href={props.socials?.instagram}
+                href={socials?.instagram}
                 target="_blank"
                 rel="noreferrer"
                 bg="blackAlpha.100"
@@ -104,9 +105,9 @@ const AuthorHeaderCard = (props: AuthorProps) => {
                 <FaInstagram />
               </Link>
             )}
-            {props.socials?.youtube && (
+            {socials?.youtube && (
               <Link
-                href={props.socials?.youtube}
+                href={socials?.youtube}
                 target="_blank"
                 rel="noreferrer"
                 bg="blackAlpha.100"

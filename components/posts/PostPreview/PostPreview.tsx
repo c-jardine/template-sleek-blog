@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { PostProps } from '../../../types'
-import { Avatar, CoverImage, Date } from '../../core'
+import { CoverImage, Date } from '../../core'
 
 const PostPreview = ({
   title,
@@ -13,12 +13,7 @@ const PostPreview = ({
   return (
     <div>
       <div className="mb-5">
-        <CoverImage
-          slug={slug}
-          title={title}
-          image={coverImage}
-          priority={false}
-        />
+        <CoverImage title={title} image={coverImage} priority={false} />
       </div>
       <h3 className="mb-3 text-3xl leading-snug">
         <Link href={`/posts/${slug}`} className="hover:underline">
@@ -29,7 +24,7 @@ const PostPreview = ({
         <Date dateString={date} />
       </div>
       <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
-      {author && <Avatar name={author.name} picture={author.picture} />}
+      {/* {author && <Avatar name={author.name} picture={author.picture} />} */}
     </div>
   )
 }

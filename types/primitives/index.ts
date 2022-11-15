@@ -9,7 +9,7 @@ export interface BlogSettingsProps {
 
 export interface PostProps {
   title: string
-  coverImage: string
+  coverImage: SanityImageObject
   date: string
   excerpt?: string
   author: AuthorProps

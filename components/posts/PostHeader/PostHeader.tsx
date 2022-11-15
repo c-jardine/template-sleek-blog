@@ -1,8 +1,7 @@
-import { Box, Flex, Link, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react'
 import { format, parseISO } from 'date-fns'
 import { PostProps } from '../../../types'
 import { CoverImage } from '../../core'
-import { PostTitle } from '../PostTitle'
 
 const PostHeader = (props: PostProps) => {
   const { title, coverImage, date, author, category, slug } = props
@@ -21,7 +20,9 @@ const PostHeader = (props: PostProps) => {
           {props.category.label}
         </Text>
       </Flex>
-      <PostTitle>{title}</PostTitle>
+      <Heading textStyle="h1" textAlign="center">
+        {title}
+      </Heading>
       <Flex fontSize="sm" gap={3} justifyContent="center" mt={4}>
         <Link>
           <Text textStyle="link">{format(parseISO(date), 'LLLL	d, yyyy')}</Text>
@@ -32,7 +33,7 @@ const PostHeader = (props: PostProps) => {
         </Link>
       </Flex>
       <Box mt={12}>
-        <CoverImage title={title} image={coverImage} priority slug={slug} />
+        <CoverImage title={title} image={coverImage} priority />
       </Box>
     </>
   )

@@ -11,20 +11,23 @@ import {
 import { format } from 'date-fns'
 import { PostProps } from '../../../types'
 
+import { urlForImage } from '../../../lib/sanity'
 import { Button } from '../Button'
 
 const Card = (props: PostProps) => {
+  const { slug, title, excerpt, coverImage, isHero, category, date, author } =
+    props || {}
   return (
     <VStack spacing={0} w="full" bg="white" shadow="md">
       <Box
         as={ChakraLink}
-        href={`/posts/post/${props.slug}`}
+        href={`/posts/post/${slug}`}
         w="full"
-        maxH={props.isHero ? 'xl' : 'lg'}
+        maxH={isHero ? 'xl' : 'lg'}
         overflow="hidden"
       >
         <Image
-          src={props.coverImage}
+          src={urlForImage(coverImage).url()}
           alt=""
           objectFit="cover"
           transition="250ms ease-in-out"
@@ -36,7 +39,7 @@ const Card = (props: PostProps) => {
         p={8}
         spacing={4}
         w="full"
-        alignItems={props.isHero ? 'center' : 'flex-start'}
+        alignItems={isHero ? 'center' : 'flex-start'}
         flex={1}
         justifyContent="space-between"
       >
@@ -52,17 +55,17 @@ const Card = (props: PostProps) => {
             letterSpacing={1}
             textStyle="link"
           >
-            {props.category.label}
+            {category.label}
           </Text>
           <chakra.h3
             as={ChakraLink}
-            href={`/posts/post/${props.slug}`}
+            href={`/posts/post/${slug}`}
             textStyle="link"
-            fontSize={props.isHero ? '4xl' : '2xl'}
+            fontSize={isHero ? '4xl' : '2xl'}
             fontWeight="semibold"
             letterSpacing="wider"
           >
-            {props.title}
+            {title}
           </chakra.h3>
           <Text display="flex" gap={3} fontSize="sm" color="blackAlpha.500">
             <chakra.span
@@ -70,31 +73,27 @@ const Card = (props: PostProps) => {
               textStyle="link"
               _hover={{ color: 'black' }}
             >
-              {format(new Date(props.date), 'MMMM do, yyyy')}
+              {format(new Date(date), 'MMMM do, yyyy')}
             </chakra.span>
             <chakra.span color="black">|</chakra.span>
             <chakra.span>
               by{' '}
               <chakra.span
                 as={ChakraLink}
-                href={`/author/${props.author.slug.current}`}
+                href={`/author/${author.slug.current}`}
                 textStyle="link"
                 _hover={{ color: 'black' }}
               >
-                {props.author.name}
+                {author.name}
               </chakra.span>
             </chakra.span>
           </Text>
           <Text color="blackAlpha.700" letterSpacing={0.5}>
-            {props.excerpt}
+            {excerpt}
           </Text>
         </Stack>
-        <Flex
-          justifyContent={props.isHero ? 'center' : 'flex-start'}
-          w="full"
-          pt={8}
-        >
-          <Button href={`/posts/post/${props.slug}`} variant="light">
+        <Flex justifyContent={isHero ? 'center' : 'flex-start'} w="full" pt={8}>
+          <Button href={`/posts/post/${slug}`} variant="light">
             Read more
           </Button>
         </Flex>
