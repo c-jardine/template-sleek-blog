@@ -1,6 +1,6 @@
 import { Box, Heading, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react'
 import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import { Card } from '../components/core'
 import Layout from '../components/layout'
 import { Posts } from '../components/posts'
@@ -14,10 +14,34 @@ const HomePage = (props: HomePageProps) => {
 
   return (
     <>
+      <NextSeo
+        title="Home"
+        description={featuredPost.excerpt}
+        canonical={blogSettings.url}
+        openGraph={{
+          url: blogSettings.url,
+          title: `Home | ${blogSettings.title}`,
+          description: featuredPost.excerpt,
+          images: [
+            {
+              url: urlForImage(featuredPost.coverImage)
+                .width(1200)
+                .height(627)
+                .fit('crop')
+                .url(),
+              width: 900,
+              height: 800,
+              alt: 'Share image',
+              type: 'image/jpeg',
+            },
+          ],
+          siteName: blogSettings.title,
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
       <Layout preview={preview}>
-        <Head>
-          <title>{blogSettings.title}</title>
-        </Head>
         <VStack
           spacing={28}
           w="full"
@@ -31,7 +55,10 @@ const HomePage = (props: HomePageProps) => {
               <Card
                 {...featuredPost}
                 isHero
-                coverImage={urlForImage(featuredPost.coverImage)}
+                coverImage={urlForImage(featuredPost.coverImage)
+                  .width(1920)
+                  .height(1080)
+                  .fit('crop')}
               />
             </Box>
           )}

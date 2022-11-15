@@ -3,11 +3,13 @@ import { SanityImageObject } from '@sanity/image-url/lib/types/types'
 
 export interface BlogSettingsProps {
   title: string
+  url: string
+  type: string
 }
 
 export interface PostProps {
   title: string
-  coverImage: SanityImageObject
+  coverImage: string
   date: string
   excerpt?: string
   author: AuthorProps

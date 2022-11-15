@@ -1,4 +1,5 @@
 import { Heading, Stack, VStack } from '@chakra-ui/react'
+import { NextSeo } from 'next-seo'
 import { Pagination } from '../../components/core'
 import Layout from '../../components/layout'
 import { Posts } from '../../components/posts'
@@ -8,33 +9,63 @@ import {
   countPostsByCategory,
   postsQuery,
 } from '../../lib/groq'
+import { urlForImage } from '../../lib/sanity'
 import { getClient } from '../../lib/sanity.server'
 
 const RESULTS_PER_PAGE = 6
 
 const PostsPage = (props) => {
-  const { preview, allPosts, currentPage, totalPages } = props
+  const { preview, allPosts, currentPage, totalPages, blogSettings } = props
   return (
-    <Layout preview={preview}>
-      <VStack
-        spacing={28}
-        w="full"
-        maxW="8xl"
-        mx="auto"
-        justifyContent="center"
-        px={4}
-      >
-        <Stack spacing={16}>
-          <Heading textStyle={['h2', 'gradient']}>All posts</Heading>
-          {allPosts.length > 0 && <Posts posts={allPosts} />}
-        </Stack>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          slug={`/posts`}
-        />
-      </VStack>
-    </Layout>
+    <>
+      <NextSeo
+        title="Posts"
+        description={allPosts[0].excerpt}
+        canonical={blogSettings.url}
+        openGraph={{
+          url: blogSettings.url,
+          title: `Posts | ${blogSettings.title}`,
+          description: allPosts[0].excerpt,
+          images: [
+            {
+              url: urlForImage(allPosts[0].coverImage)
+                .width(1200)
+                .height(627)
+                .fit('crop')
+                .url(),
+              width: 900,
+              height: 800,
+              alt: 'Share image',
+              type: 'image/jpeg',
+            },
+          ],
+          siteName: blogSettings.title,
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
+      <Layout preview={preview}>
+        <VStack
+          spacing={28}
+          w="full"
+          maxW="8xl"
+          mx="auto"
+          justifyContent="center"
+          px={4}
+        >
+          <Stack spacing={16}>
+            <Heading textStyle={['h2', 'gradient']}>All posts</Heading>
+            {allPosts.length > 0 && <Posts posts={allPosts} />}
+          </Stack>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            slug={`/posts`}
+          />
+        </VStack>
+      </Layout>
+    </>
   )
 }
 

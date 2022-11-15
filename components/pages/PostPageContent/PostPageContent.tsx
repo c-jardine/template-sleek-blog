@@ -1,7 +1,5 @@
 import { Box, Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { urlForImage } from '../../../lib/sanity'
 import { PostPageProps } from '../../../types'
 import Layout from '../../layout'
 import {
@@ -22,20 +20,6 @@ const PostPageContent = (props: PostPageProps) => {
 
   return (
     <Layout preview={preview}>
-      <Head>
-        <title>{`${post.title} | ${blogSettings.title}`}</title>
-        {post.coverImage?.asset?._ref && (
-          <meta
-            key="ogImage"
-            property="og:image"
-            content={urlForImage(post.coverImage)
-              .width(1200)
-              .height(627)
-              .fit('crop')
-              .url()}
-          />
-        )}
-      </Head>
       <Box>
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>

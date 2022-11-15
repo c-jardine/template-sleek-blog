@@ -16,6 +16,8 @@ import {
 } from '../../../lib/groq'
 import { getClient } from '../../../lib/sanity.server'
 import { AuthorPageProps } from '../../../types'
+import { NextSeo } from 'next-seo'
+import { urlForImage } from '../../../lib/sanity'
 
 const RESULTS_PER_PAGE = 4
 
@@ -33,50 +35,85 @@ const AuthorPage = (props: AuthorPageProps) => {
     totalPages,
   } = props
 
+  const [firstName, lastName] = author.name.split(' ')
+
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
   }
 
   return (
-    <Layout preview={preview}>
-      <VStack spacing={28}>
-        <Grid
-          templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
-          maxW="8xl"
-          gap={8}
-          w="full"
-          mx="auto"
-          px={4}
-        >
-          <GridItem colSpan={{ base: 1, lg: 2 }}>
-            <VStack spacing={28}>
-              {/* {!author ? (
+    <>
+      <NextSeo
+        title={author.name}
+        description={author.bio}
+        canonical={`blogSettings.url/${author.slug}`}
+        openGraph={{
+          url: blogSettings.url,
+          title: `${author.name} | ${blogSettings.title}`,
+          description: author.bio,
+          profile: {
+            firstName,
+            lastName,
+          },
+          images: [
+            {
+              url: urlForImage(author.picture)
+                .width(1200)
+                .height(627)
+                .fit('crop')
+                .url(),
+              width: 900,
+              height: 800,
+              alt: 'Share image',
+              type: 'image/jpeg',
+            },
+          ],
+          siteName: blogSettings.title,
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
+      <Layout preview={preview}>
+        <VStack spacing={28}>
+          <Grid
+            templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
+            maxW="8xl"
+            gap={8}
+            w="full"
+            mx="auto"
+            px={4}
+          >
+            <GridItem colSpan={{ base: 1, lg: 2 }}>
+              <VStack spacing={28}>
+                {/* {!author ? (
                 <AuthorHeaderCardSkeleton />
               ) : (
                 <AuthorHeaderCard {...author} />
               )} */}
-              <Stack spacing={8}>
-                <AuthorPosts preview={preview} posts={posts} />
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  slug={`/author/${slug}`}
-                />
-              </Stack>
-            </VStack>
-          </GridItem>
-          <GridItem as={Stack} spacing={16}>
-            {author && (
-              <>
-                <AuthorCard {...author} />
-                <AuthorSocials {...author} />
-                <CategoryPostsCard data={categories} />
-              </>
-            )}
-          </GridItem>
-        </Grid>
-      </VStack>
-    </Layout>
+                <Stack spacing={8}>
+                  <AuthorPosts preview={preview} posts={posts} />
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    slug={`/author/${slug}`}
+                  />
+                </Stack>
+              </VStack>
+            </GridItem>
+            <GridItem as={Stack} spacing={16}>
+              {author && (
+                <>
+                  <AuthorCard {...author} />
+                  <AuthorSocials {...author} />
+                  <CategoryPostsCard data={categories} />
+                </>
+              )}
+            </GridItem>
+          </Grid>
+        </VStack>
+      </Layout>
+    </>
   )
 }
 

@@ -1,3 +1,4 @@
+import { ArticleJsonLd, NextSeo, SocialProfileJsonLd } from 'next-seo'
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
 import { PostPageContent } from '../../../components/pages'
@@ -6,18 +7,81 @@ import {
   postsByAuthorQuery,
   postSlugsQuery,
 } from '../../../lib/groq'
+import { urlForImage } from '../../../lib/sanity'
 import { getClient, overlayDrafts } from '../../../lib/sanity.server'
 import { PostPageProps } from '../../../types'
 
 const PostPage = (props: PostPageProps) => {
   const router = useRouter()
-  const { slug, post } = props
+  const { slug, post, blogSettings } = props
+  const { socials } = post.author
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  return <PostPageContent {...props} />
+  return (
+    <>
+      <NextSeo
+        title={post.title}
+        description={post.excerpt}
+        canonical={`${blogSettings.url}/posts/post/${slug}`}
+        openGraph={{
+          type: 'article',
+          url: `${blogSettings.url}/posts/post/${slug}`,
+          title: post.title,
+          description: post.excerpt,
+          article: {
+            publishedTime: post.date,
+            authors: [post.author.name],
+            section: post.category.label,
+          },
+          images: [
+            {
+              url: urlForImage(post.coverImage)
+                .width(1200)
+                .height(627)
+                .fit('crop')
+                .url(),
+              width: 900,
+              height: 800,
+              alt: 'Share image',
+              type: 'image/jpeg',
+            },
+          ],
+          siteName: blogSettings.title,
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+        }}
+      />
+      <ArticleJsonLd
+        url={`${blogSettings.url}/posts/post/${slug}`}
+        title={post.title}
+        images={[urlForImage(post.coverImage).url()]}
+        datePublished={post.date}
+        authorName={[
+          {
+            name: post.author.name,
+          },
+        ]}
+        description={post.excerpt}
+        isAccessibleForFree={true}
+      />
+      <SocialProfileJsonLd
+        type="Person"
+        name={post.author.name}
+        url={blogSettings.url}
+        sameAs={[
+          socials.facebook,
+          socials.instagram,
+          socials.twitter,
+          socials.youtube,
+        ]}
+      />
+      <PostPageContent {...props} />
+    </>
+  )
 }
 
 export const getStaticPaths = async () => {
