@@ -1,6 +1,5 @@
 import { Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
-import { useRouter } from 'next/router'
 import { Pagination } from '../../../components/core'
 import Layout from '../../../components/layout'
 import {
@@ -21,8 +20,6 @@ import { AuthorPageProps } from '../../../types'
 const RESULTS_PER_PAGE = 4
 
 const AuthorPage = (props: AuthorPageProps) => {
-  const router = useRouter()
-
   const {
     preview,
     slug,
