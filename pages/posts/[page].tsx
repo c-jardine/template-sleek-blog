@@ -1,8 +1,13 @@
-import { Box, Heading, Stack, VStack } from '@chakra-ui/react'
+import { Heading, Stack, VStack } from '@chakra-ui/react'
 import { Pagination } from '../../components/core'
 import Layout from '../../components/layout'
 import { Posts } from '../../components/posts'
-import * as query from '../../lib/queries'
+import {
+  blogSettingsQuery,
+  countAllPostsQuery,
+  countPostsByCategory,
+  postsQuery,
+} from '../../lib/groq'
 import { getClient } from '../../lib/sanity.server'
 
 const RESULTS_PER_PAGE = 6
@@ -17,6 +22,7 @@ const PostsPage = (props) => {
         maxW="8xl"
         mx="auto"
         justifyContent="center"
+        px={4}
       >
         <Stack spacing={16}>
           <Heading textStyle={['h2', 'gradient']}>All posts</Heading>
@@ -34,7 +40,7 @@ const PostsPage = (props) => {
 
 export const getStaticPaths = async () => {
   const totalPages = Math.ceil(
-    (await getClient(false).fetch(query.countAllPostsQuery)) / RESULTS_PER_PAGE
+    (await getClient(false).fetch(countAllPostsQuery)) / RESULTS_PER_PAGE
   )
   const totalPagesArray = [...Array(Math.ceil(totalPages)).keys()].map(
     (page) => {
@@ -45,7 +51,6 @@ export const getStaticPaths = async () => {
       }
     }
   )
-  console.log(totalPagesArray)
 
   return {
     paths: totalPagesArray,
@@ -55,25 +60,24 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params, preview = false }) => {
   // Fetch requested post and the three most recent posts, excluding this one.
-  const totalPosts = await getClient(false).fetch(query.countAllPostsQuery)
+  const totalPosts = await getClient(false).fetch(countAllPostsQuery)
   const totalPages = Math.ceil(totalPosts / RESULTS_PER_PAGE)
 
   const start = (params.page - 1) * RESULTS_PER_PAGE
   const end = start + RESULTS_PER_PAGE
 
-  const posts = await getClient(preview).fetch(query.allPostsQuery, {
+  const posts = await getClient(preview).fetch(postsQuery, {
     start,
     end,
   })
-  console.log(posts)
 
   // Fetch the blog settings for page metadata
   // TODO: Can this be moved into context so it doesn't need fetched on every page?
-  const blogSettings = await getClient(preview).fetch(query.settingsQuery)
+  const blogSettings = await getClient(preview).fetch(blogSettingsQuery)
 
   // Fetch the list of categories and count the number of articles under each.
-  const countPostsByCategory = await getClient(preview).fetch(
-    query.countPostsByCategory
+  const numberOfPostsInCategory = await getClient(preview).fetch(
+    countPostsByCategory
   )
 
   return {
@@ -81,7 +85,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
       preview,
       allPosts: posts,
       blogSettings,
-      countPostsByCategory,
+      numberOfPostsInCategory,
       currentPage: params.page,
       totalPages,
     },

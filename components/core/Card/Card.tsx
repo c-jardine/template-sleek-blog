@@ -9,8 +9,8 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { format } from 'date-fns'
+import { PostProps } from '../../../types'
 
-import { PostProps } from '../../../types/index'
 import { Button } from '../Button'
 
 const Card = (props: PostProps) => {

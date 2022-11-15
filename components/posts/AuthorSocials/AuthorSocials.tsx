@@ -1,11 +1,10 @@
-import { Box, HStack, Image, Link, Stack, Text } from '@chakra-ui/react'
-import { urlForImage } from '../../../lib/sanity'
+import { HStack, Link, Stack, Text } from '@chakra-ui/react'
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF'
+import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
+import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube'
 import { AuthorProps } from '../../../types'
 import { SectionSeparator } from '../../core'
-import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF'
-import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
-import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
-import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube'
 
 const AuthorCard = (props: AuthorProps) => {
   return (

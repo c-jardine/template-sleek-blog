@@ -1,8 +1,9 @@
 import { chakra, Link, Stack, Text } from '@chakra-ui/react'
-import { SectionSeparator } from '../../core'
 import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight'
+import { SectionSeparator } from '../../core'
+import { CategoryPostsCardProps } from './CategoryPostsCard.types'
 
-const CategoryPostsCard = (props: { posts: any[] }) => {
+const CategoryPostsCard = (props: { data: CategoryPostsCardProps[] }) => {
   return (
     <Stack bg="white" w="full" shadow="md" p={8} spacing={8}>
       <Text
@@ -17,9 +18,9 @@ const CategoryPostsCard = (props: { posts: any[] }) => {
       </Text>
       <SectionSeparator />
       <Stack divider={<SectionSeparator />} gap={2}>
-        {props.posts.map((p, index) => (
+        {props.data.map((category) => (
           <Text
-            key={index}
+            key={category.label}
             display="flex"
             alignItems="center"
             gap={2}
@@ -36,10 +37,10 @@ const CategoryPostsCard = (props: { posts: any[] }) => {
               textStyle="link"
             >
               <chakra.span textStyle="link" fontWeight="semibold">
-                {p.label}
+                {category.label}
               </chakra.span>
             </Link>{' '}
-            ({p.posts})
+            ({category.posts})
           </Text>
         ))}
       </Stack>

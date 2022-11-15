@@ -1,17 +1,9 @@
-import { Button, Grid, HStack, Text } from '@chakra-ui/react'
+import { Grid, HStack } from '@chakra-ui/react'
 import { urlForImage } from '../../../lib/sanity'
 import { PostProps } from '../../../types'
 import { Card, CardSkeleton } from '../../core'
-import React from 'react'
-import { getClient } from '../../../lib/sanity.server'
-import * as query from '../../../lib/queries'
-import useSWR from 'swr'
 
-const AuthorPosts = (props: {
-  preview: any
-  slug: string
-  posts: PostProps[]
-}) => {
+const AuthorPosts = (props: { preview: any; posts: PostProps[] }) => {
   return (
     <>
       <Grid

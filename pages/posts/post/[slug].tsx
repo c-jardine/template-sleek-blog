@@ -1,16 +1,17 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
 import { PostPageContent } from '../../../components/pages'
-
-import * as query from '../../../lib/queries'
+import {
+  postPageQuery,
+  postsByAuthorQuery,
+  postSlugsQuery,
+} from '../../../lib/groq'
 import { getClient, overlayDrafts } from '../../../lib/sanity.server'
 import { PostPageProps } from '../../../types'
 
 const PostPage = (props: PostPageProps) => {
   const router = useRouter()
-  const { data: initialData } = props
-
-  const slug = initialData?.post?.slug
+  const { slug, post } = props
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -20,7 +21,7 @@ const PostPage = (props: PostPageProps) => {
 }
 
 export const getStaticPaths = async () => {
-  const paths = await getClient(false).fetch(query.postSlugsQuery)
+  const paths = await getClient(false).fetch(postSlugsQuery)
   return {
     paths: paths.map((slug: string) => ({ params: { slug } })),
     fallback: true,
@@ -29,41 +30,28 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params, preview = false }) => {
   // Fetch requested post and the three most recent posts, excluding this one.
-  const { post, recentPosts } = await getClient(preview).fetch(
-    query.postQuery,
-    {
-      slug: params.slug,
-    }
-  )
-
-  // Fetch the blog settings for page metadata
-  // TODO: Can this be moved into context so it doesn't need fetched on every page?
-  const blogSettings = await getClient(preview).fetch(query.settingsQuery)
+  const { blogSettings, post, categories, recentPosts } = await getClient(
+    preview
+  ).fetch(postPageQuery, {
+    slug: params.slug,
+  })
 
   // Fetch the three most recent posts, excluding this one, by the author of this post.
-  const postsByAuthor = await getClient(preview).fetch(
-    query.postsByAuthorQuery,
-    {
-      slug: params.slug,
-      authorName: post.author.name,
-    }
-  )
-
-  // Fetch the list of categories and count the number of articles under each.
-  const countPostsByCategory = await getClient(preview).fetch(
-    query.countPostsByCategory
-  )
+  // TODO: Move this into main query.
+  const postsByAuthor = await getClient(preview).fetch(postsByAuthorQuery, {
+    slug: params.slug,
+    authorName: post.author.name,
+  })
 
   return {
     props: {
+      slug: params.slug,
       preview,
-      data: {
-        post,
-        recentPosts: overlayDrafts(recentPosts),
-      },
+      post,
+      recentPosts: overlayDrafts(recentPosts),
       blogSettings,
       postsByAuthor,
-      countPostsByCategory,
+      categories,
     },
     // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
     revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,

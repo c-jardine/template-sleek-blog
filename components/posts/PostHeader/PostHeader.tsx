@@ -1,7 +1,7 @@
 import { Box, Flex, Link, Text } from '@chakra-ui/react'
 import { format, parseISO } from 'date-fns'
 import { PostProps } from '../../../types'
-import { CoverImage, Date } from '../../core'
+import { CoverImage } from '../../core'
 import { PostTitle } from '../PostTitle'
 
 const PostHeader = (props: PostProps) => {

@@ -5,7 +5,7 @@ import { Card } from '../../core'
 
 const Posts = ({ posts }: { posts: PostProps[] }) => {
   return (
-    <Box px={{ base: 4, '2xl': 0 }}>
+    <Box>
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 3 }}
         w="full"

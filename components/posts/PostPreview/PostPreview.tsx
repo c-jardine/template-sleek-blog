@@ -1,5 +1,4 @@
 import Link from 'next/link'
-
 import { PostProps } from '../../../types'
 import { Avatar, CoverImage, Date } from '../../core'
 

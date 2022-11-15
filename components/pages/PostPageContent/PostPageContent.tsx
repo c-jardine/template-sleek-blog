@@ -1,8 +1,7 @@
 import { Box, Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
 import Head from 'next/head'
-import * as query from '../../../lib/queries'
 import { useRouter } from 'next/router'
-import { urlForImage, usePreviewSubscription } from '../../../lib/sanity'
+import { urlForImage } from '../../../lib/sanity'
 import { PostPageProps } from '../../../types'
 import Layout from '../../layout'
 import {
@@ -11,29 +10,20 @@ import {
   CategoryPostsCard,
   PostBody,
   PostHeader,
+  Posts,
   PostsByAuthorCard,
   PostTitle,
-  Posts,
 } from '../../posts'
 
 const PostPageContent = (props: PostPageProps) => {
   const router = useRouter()
 
-  const { data: initialData, preview, blogSettings } = props
-
-  const slug = initialData?.post?.slug
-  const { data } = usePreviewSubscription(query.postQuery, {
-    params: { slug },
-    initialData: initialData,
-    enabled: preview && !!slug,
-  })
-  const { post, recentPosts } = data || {}
-  const { title = 'Untitled Blog' } = blogSettings || {}
+  const { post, slug, recentPosts, categories, preview, blogSettings } = props
 
   return (
     <Layout preview={preview}>
       <Head>
-        <title>{`${post.title} | ${title}`}</title>
+        <title>{`${post.title} | ${blogSettings.title}`}</title>
         {post.coverImage?.asset?._ref && (
           <meta
             key="ogImage"
@@ -82,7 +72,7 @@ const PostPageContent = (props: PostPageProps) => {
                   posts={props.postsByAuthor}
                   author={post.author.name}
                 />
-                <CategoryPostsCard posts={props.countPostsByCategory} />
+                <CategoryPostsCard data={categories} />
               </GridItem>
             </Grid>
             <Box>{recentPosts.length > 0 && <Posts posts={recentPosts} />}</Box>

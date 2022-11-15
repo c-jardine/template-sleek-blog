@@ -9,7 +9,11 @@ import {
   AuthorSocials,
   CategoryPostsCard,
 } from '../../../components/posts'
-import * as query from '../../../lib/queries'
+import {
+  authorPageQuery,
+  authorSlugsQuery,
+  countPostsByAuthor,
+} from '../../../lib/groq'
 import { getClient } from '../../../lib/sanity.server'
 import { AuthorPageProps } from '../../../types'
 
@@ -18,8 +22,16 @@ const RESULTS_PER_PAGE = 4
 const AuthorPage = (props: AuthorPageProps) => {
   const router = useRouter()
 
-  const { preview, slug, author, posts, categories, currentPage, totalPages } =
-    props
+  const {
+    preview,
+    slug,
+    blogSettings,
+    author,
+    posts,
+    categories,
+    currentPage,
+    totalPages,
+  } = props
 
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -34,7 +46,7 @@ const AuthorPage = (props: AuthorPageProps) => {
           gap={8}
           w="full"
           mx="auto"
-          px={{ base: 4, md: 8 }}
+          px={4}
         >
           <GridItem colSpan={{ base: 1, lg: 2 }}>
             <VStack spacing={28}>
@@ -44,7 +56,7 @@ const AuthorPage = (props: AuthorPageProps) => {
                 <AuthorHeaderCard {...author} />
               )} */}
               <Stack spacing={8}>
-                <AuthorPosts preview={preview} slug={slug} posts={posts} />
+                <AuthorPosts preview={preview} posts={posts} />
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
@@ -58,7 +70,7 @@ const AuthorPage = (props: AuthorPageProps) => {
               <>
                 <AuthorCard {...author} />
                 <AuthorSocials {...author} />
-                <CategoryPostsCard posts={categories} />
+                <CategoryPostsCard data={categories} />
               </>
             )}
           </GridItem>
@@ -69,17 +81,18 @@ const AuthorPage = (props: AuthorPageProps) => {
 }
 
 /**
- * Match paths based on author's slug.
+ * Match paths based on author's slug. It works by retrieving all author slugs,
+ * and calculates the total number of pages of posts that author will have,
+ * based on the results show per page.
  */
 export const getStaticPaths = async () => {
-  const slugs = await getClient(false).fetch(query.authorSlugsQuery)
-  // const paths = slugs.map((slug: string) => ({ params: { slug } }))
+  const slugs = await getClient(false).fetch(authorSlugsQuery)
   const pathsData = await Promise.all(
     slugs.map(async (slug: string) => {
       // Get the total number of posts by the author and divide by the
       // number shown per page to get the total number of pages.
       const totalPages =
-        (await getClient(false).fetch(query.countPostsByAuthor, {
+        (await getClient(false).fetch(countPostsByAuthor, {
           slug,
         })) / RESULTS_PER_PAGE
       const totalPagesArray = [...Array(Math.ceil(totalPages)).keys()]
@@ -104,34 +117,25 @@ export const getStaticPaths = async () => {
  * Retrieve the necessary data.
  */
 export const getStaticProps = async ({ params, preview = false }) => {
-  // Fetch the blog settings for page metadata
-  // TODO: Can this be moved into context so it doesn't need fetched on every page?
-  const blogSettings = await getClient(preview).fetch(query.settingsQuery)
-
-  const totalPosts = await getClient(false).fetch(query.countPostsByAuthor, {
-    slug: params.slug,
-  })
-  const totalPages = Math.ceil(totalPosts / RESULTS_PER_PAGE)
-
   const start = (params.page - 1) * RESULTS_PER_PAGE
   const end = start + RESULTS_PER_PAGE
 
-  const posts = await getClient(preview).fetch(query.authorPostsQuery, {
-    slug: params.slug,
-    start,
-    end,
-  })
+  const { blogSettings, author, totalPosts, posts, categories } =
+    await getClient(preview).fetch(authorPageQuery, {
+      slug: params.slug,
+      start,
+      end,
+    })
 
-  // Fetch the list of categories and count the number of articles under each.
-  const categories = await getClient(preview).fetch(query.countPostsByCategory)
+  const totalPages = Math.ceil(totalPosts / RESULTS_PER_PAGE)
 
   return {
     props: {
       preview,
       slug: params.slug,
-      author: posts[0].author,
+      blogSettings,
+      author,
       posts,
-      blog: blogSettings,
       categories,
       currentPage: params.page,
       totalPages,
