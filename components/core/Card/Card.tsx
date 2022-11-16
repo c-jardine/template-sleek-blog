@@ -25,9 +25,14 @@ const Card = (props: PostProps) => {
         w="full"
         maxH={isHero ? 'xl' : 'lg'}
         overflow="hidden"
+        aria-label={`View the post titled "${title}"`}
       >
         <Image
-          src={urlForImage(coverImage).url()}
+          src={
+            isHero
+              ? urlForImage(coverImage).width(1920).url()
+              : urlForImage(coverImage).width(992).url()
+          }
           alt=""
           objectFit="cover"
           transition="250ms ease-in-out"
@@ -70,7 +75,7 @@ const Card = (props: PostProps) => {
           </chakra.h3>
           <Text display="flex" gap={3} fontSize="sm" color="blackAlpha.500">
             <chakra.span
-              as={ChakraLink}
+              // as={ChakraLink}
               textStyle="link"
               _hover={{ color: 'black' }}
             >
@@ -94,8 +99,12 @@ const Card = (props: PostProps) => {
           </Text>
         </Stack>
         <Flex justifyContent={isHero ? 'center' : 'flex-start'} w="full" pt={8}>
-          <Button href={`/posts/post/${slug}`} variant="light">
-            Read more
+          <Button
+            href={`/posts/post/${slug}`}
+            variant="light"
+            ariaLabel={`View the post titled "${title}"`}
+          >
+            View post
           </Button>
         </Flex>
       </Stack>

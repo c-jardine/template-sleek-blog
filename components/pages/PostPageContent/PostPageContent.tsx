@@ -68,6 +68,7 @@ const PostPageContent = (props: PostPageProps) => {
             <Heading textStyle={['h2', 'gradient']}>Recent posts</Heading>
             <Box>{recentPosts.length > 0 && <Posts posts={recentPosts} />}</Box>
             <Link
+              aria-label="View all recent posts"
               display="flex"
               flexDirection="row"
               alignItems="center"

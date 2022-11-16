@@ -4,10 +4,12 @@ import React from 'react';
 const Button = (props: {
   variant?: 'light' | 'dark';
   href?: string;
+  ariaLabel: string;
   children: string | React.ReactNode;
 }) => {
   return (
     <Box
+      aria-label={props.ariaLabel}
       as={ChakraLink}
       href={props.href}
       bgGradient="linear(to-br, purple.400, brand.400)"

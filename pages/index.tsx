@@ -70,6 +70,7 @@ const HomePage = (props: HomePageProps) => {
             <Heading textStyle={['h2', 'gradient']}>Recent posts</Heading>
             {recentPosts.length > 0 && <Posts posts={recentPosts} />}
             <Link
+              aria-label="View all blog posts"
               display="flex"
               flexDirection="row"
               alignItems="center"
@@ -80,7 +81,7 @@ const HomePage = (props: HomePageProps) => {
               href="/posts"
             >
               <Text textStyle="link" variant="upperWide" color="black">
-                View all
+                View all posts
               </Text>
               <Icon as={BsArrowRight} h={5} w={5} />
             </Link>
