@@ -1,17 +1,11 @@
-import { Container } from '@chakra-ui/react';
-import cn from 'classnames';
+import { Box, Container } from '@chakra-ui/react';
 import Link from 'next/link';
 
 const Alert = ({ preview }) => {
   return (
-    <div
-      className={cn('border-b', {
-        'border-accent-7 bg-accent-7 text-white': preview,
-        'border-accent-2 bg-accent-1': !preview,
-      })}
-    >
+    <Box>
       <Container>
-        <div className="py-2 text-center text-sm">
+        <Box>
           {preview && (
             <>
               This page is a preview.{' '}
@@ -24,9 +18,9 @@ const Alert = ({ preview }) => {
               to exit preview mode.
             </>
           )}
-        </div>
+        </Box>
       </Container>
-    </div>
+    </Box>
   );
 };
 
