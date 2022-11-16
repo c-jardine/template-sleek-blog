@@ -1,4 +1,11 @@
-import { Box, Image, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Image,
+  Stack,
+  Text,
+  Link as ChakraLink,
+  chakra,
+} from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { urlForImage } from '../../../lib/sanity';
 import { PostProps } from '../../../types';
@@ -20,7 +27,13 @@ const PostsByAuthorCard = (props: { posts: PostProps[]; author: string }) => {
       <SectionSeparator />
       {props.posts.map((post, index) => (
         <Stack key={index} direction={{ base: 'column', lg: 'row' }}>
-          <Box maxW={{ base: 'full', lg: '33%' }} h={16} overflow="hidden">
+          <Box
+            as={ChakraLink}
+            href={`/posts/post/${post.slug.current}`}
+            maxW={{ base: 'full', lg: '33%' }}
+            h={{ base: 48, lg: 16 }}
+            overflow="hidden"
+          >
             <Image
               src={urlForImage(post.coverImage).url()}
               alt="Post image"
@@ -28,14 +41,16 @@ const PostsByAuthorCard = (props: { posts: PostProps[]; author: string }) => {
             />
           </Box>
           <Box>
-            <Text
-              fontWeight="bold"
-              color="black"
-              letterSpacing={1}
-              lineHeight={1.5}
+            <chakra.h3
+              as={ChakraLink}
+              href={`/posts/post/${post.slug.current}`}
+              textStyle="link"
+              fontWeight="semibold"
+              letterSpacing="wide"
+              fontSize="md"
             >
               {post.title}
-            </Text>
+            </chakra.h3>
             <Text fontSize="xs">
               {format(new Date(post.date), 'MMMM dd, yyyy')}
             </Text>
