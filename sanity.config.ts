@@ -13,6 +13,9 @@ import categoryType from './schemas/category';
 import postType from './schemas/post';
 import settingsType from './schemas/settings';
 import socialsType from './schemas/socials';
+import homePageType from './schemas/homePage';
+import { BiWrench } from '@react-icons/all-files/bi/BiWrench';
+import { MdHome } from '@react-icons/all-files/md/MdHome';
 
 // @TODO: update next-sanity/studio to automatically set this when needed
 const basePath = '/studio';
@@ -24,21 +27,47 @@ const config = defineConfig({
   title: process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Blog Admin',
   schema: {
     // If you want more content types, you can add them to this array
-    types: [settingsType, postType, authorType, socialsType, categoryType],
+    types: [
+      settingsType,
+      postType,
+      authorType,
+      socialsType,
+      categoryType,
+      homePageType,
+    ],
   },
   plugins: [
     deskTool({
       structure: (S) => {
         // The `Settings` root list item
-        const settingsListItem = // A singleton not using `documentListItem`, eg no built-in preview
+        const settings = // A singleton not using `documentListItem`, eg no built-in preview
           S.listItem()
-            .title(settingsType.title)
+            .title('Settings')
             .icon(settingsType.icon)
             .child(
-              S.editor()
-                .id(settingsType.name)
-                .schemaType(settingsType.name)
-                .documentId(settingsType.name)
+              S.list()
+                .title('Settings')
+                .items([
+                  S.listItem()
+                    .title('General')
+                    .icon(BiWrench)
+                    .child(
+                      S.editor()
+                        .id(settingsType.name)
+                        .schemaType(settingsType.name)
+                        .documentId(settingsType.name)
+                    ),
+                  S.divider(),
+                  S.listItem()
+                    .title('Home Page')
+                    .icon(MdHome)
+                    .child(
+                      S.document()
+                        .id(homePageType.name)
+                        .schemaType(homePageType.name)
+                        .documentId(homePageType.name)
+                    ),
+                ])
             );
 
         // The default root list items (except custom ones)
@@ -48,7 +77,7 @@ const config = defineConfig({
 
         return S.list()
           .title('Content')
-          .items([settingsListItem, S.divider(), ...defaultListItems]);
+          .items([settings, S.divider(), ...defaultListItems]);
       },
 
       // `defaultDocumentNode is responsible for adding a “Preview” tab to the document pane
