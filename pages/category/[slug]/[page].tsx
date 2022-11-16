@@ -97,7 +97,6 @@ export const getStaticProps = async ({
       end,
     }
   );
-  console.log(blogSettings);
 
   return {
     props: {

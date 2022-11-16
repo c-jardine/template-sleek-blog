@@ -16,6 +16,11 @@ module.exports = {
         destination: '/posts/1',
         permanent: true,
       },
+      {
+        source: '/category/:slug',
+        destination: '/category/:slug/1',
+        permanent: true,
+      },
     ];
   },
 

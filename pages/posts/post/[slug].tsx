@@ -20,10 +20,6 @@ const PostPage = (props: PostPageProps) => {
   const { slug, post, blogSettings } = props || {};
   const { socials } = post?.author || {};
 
-  if (!router.isFallback && !slug) {
-    return <ErrorPage statusCode={404} />;
-  }
-
   if (!props) {
     return <Text>Loading</Text>;
   }
@@ -117,8 +113,6 @@ export const getStaticProps = async ({
     slug: params.slug,
     authorName: post?.author?.name,
   });
-
-  console.log(categories);
 
   return {
     props: {

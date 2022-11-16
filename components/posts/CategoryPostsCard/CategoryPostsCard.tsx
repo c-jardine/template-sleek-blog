@@ -1,4 +1,10 @@
-import { chakra, Link, Stack, Text } from '@chakra-ui/react';
+import {
+  chakra,
+  Link,
+  Stack,
+  Text,
+  Link as ChakraLink,
+} from '@chakra-ui/react';
 import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight';
 import { SectionSeparator } from '../../core';
 import { CategoryPostsCardProps } from './CategoryPostsCard.types';
@@ -30,16 +36,15 @@ const CategoryPostsCard = (props: { data: CategoryPostsCardProps[] }) => {
             <chakra.span color="blackAlpha.400">
               <FaChevronRight size={10} />
             </chakra.span>
-            <Link
-              color="black"
-              fontWeight="normal"
-              role="group"
+            <chakra.span
+              as={ChakraLink}
+              href={`/category/${category.slug.current}`}
               textStyle="link"
+              fontWeight="semibold"
+              color="chalkboard"
             >
-              <chakra.span textStyle="link" fontWeight="semibold">
-                {category.label}
-              </chakra.span>
-            </Link>{' '}
+              {category.label}
+            </chakra.span>
             ({category.posts})
           </Text>
         ))}

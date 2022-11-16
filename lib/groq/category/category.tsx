@@ -18,7 +18,7 @@ count(*[_type == "post" && category._ref in *[_type == "category" && slug.curren
 
 export const GET_ALL_CATEGORIES_WITH_POST_COUNT = groq`
 *[_type == "category"] {
-    label,
+    label, slug,
       "posts": count(*[_type == "post" && category._ref == ^._id])
   }
 `;
