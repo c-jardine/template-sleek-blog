@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity';
 import { blogSettingsQuery } from '../blog';
-import { countPostsByCategory } from '../category';
+import { GET_ALL_CATEGORIES_WITH_POST_COUNT } from '../category';
 import { postFields, recentPostsQuery } from '../post';
 
 /**
@@ -26,6 +26,6 @@ export const postPageQuery = groq`
 {
   "blogSettings": ${blogSettingsQuery},
   "post": ${postBySlugQuery},
-  "categories": ${countPostsByCategory},
+  "categories": ${GET_ALL_CATEGORIES_WITH_POST_COUNT},
   "recentPosts": ${recentPostsQuery}
 }`;

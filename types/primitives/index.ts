@@ -28,6 +28,7 @@ export interface AuthorProps {
 }
 
 export interface CategoryProps {
+  slug: SlugProps;
   label: string;
 }
 

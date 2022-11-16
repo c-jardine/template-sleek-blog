@@ -1,5 +1,4 @@
 import { Box, Grid, GridItem, Stack, VStack } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import { PageLayout } from '../../../layouts';
 import { PostPageProps } from '../../../types';
 import {
@@ -13,8 +12,6 @@ import {
 } from '../../posts';
 
 const PostPageContent = (props: PostPageProps) => {
-  const router = useRouter();
-
   const { post, slug, recentPosts, categories, preview, blogSettings } = props;
 
   return (

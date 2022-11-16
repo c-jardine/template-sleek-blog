@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 import { authorPostsQuery, countPostsByAuthor } from '../author';
 import { blogSettingsQuery } from '../blog';
-import { countPostsByCategory } from '../category';
+import { COUNT_POSTS_BY_CATEGORY } from '../category';
 
 export const authorSlugsQuery = groq`
 *[_type == "author" && defined(slug.current)][].slug.current
@@ -26,5 +26,5 @@ export const authorPageQuery = groq`
   "author": ${authorBySlugQuery},
   "totalPosts": ${countPostsByAuthor},
   "posts": ${authorPostsQuery},
-  "categories": ${countPostsByCategory}
+  "categories": ${COUNT_POSTS_BY_CATEGORY}
 }`;

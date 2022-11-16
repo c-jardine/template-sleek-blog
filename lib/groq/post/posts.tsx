@@ -9,7 +9,7 @@ export const postFields = groq`
   coverImage,
   "slug": slug.current,
   "author": author->{name, slug, picture, bio, socials->{...}},
-  "category": category->{label}
+  "category": category->{...}
 `;
 
 export const recentPostsQuery = groq`

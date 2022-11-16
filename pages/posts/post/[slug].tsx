@@ -118,6 +118,8 @@ export const getStaticProps = async ({
     authorName: post?.author?.name,
   });
 
+  console.log(categories);
+
   return {
     props: {
       slug: params.slug,

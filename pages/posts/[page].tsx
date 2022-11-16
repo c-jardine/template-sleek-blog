@@ -81,7 +81,8 @@ export const getStaticProps = async ({
 }): Promise<PostsPageStaticPropsResponse> => {
   const { start, end, totalPages } = await pagination(
     params.page,
-    RESULTS_PER_PAGE
+    RESULTS_PER_PAGE,
+    countAllPostsQuery
   );
 
   const { blogSettings, posts } = await getClient(preview).fetch(

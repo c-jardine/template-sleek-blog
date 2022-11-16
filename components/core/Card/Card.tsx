@@ -46,6 +46,7 @@ const Card = (props: PostProps) => {
         <Stack>
           <Text
             as={ChakraLink}
+            href={`/category/${category.slug.current}/1`}
             color="brand.600"
             borderBottom="1px solid"
             borderColor="brand.500"
