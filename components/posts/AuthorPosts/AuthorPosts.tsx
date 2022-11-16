@@ -1,10 +1,10 @@
-import { Grid, HStack } from '@chakra-ui/react'
-import { urlForImage } from '../../../lib/sanity'
-import { PostProps } from '../../../types'
-import { Card, CardSkeleton } from '../../core'
+import { Grid, HStack } from '@chakra-ui/react';
+import { urlForImage } from '../../../lib/sanity';
+import { PostProps } from '../../../types';
+import { Card, CardSkeleton } from '../../core';
 
 const AuthorPosts = (props: { preview: any; posts: PostProps[] }) => {
-  const { preview, posts } = props || {}
+  const { preview, posts } = props || {};
   return (
     <>
       <Grid
@@ -25,6 +25,6 @@ const AuthorPosts = (props: { preview: any; posts: PostProps[] }) => {
       </Grid>
       <HStack></HStack>
     </>
-  )
-}
-export default AuthorPosts
+  );
+};
+export default AuthorPosts;

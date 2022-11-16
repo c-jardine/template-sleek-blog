@@ -1,6 +1,6 @@
-import { groq } from 'next-sanity'
-import { blogSettingsQuery } from '../blog'
-import { postFields, postsQuery } from '../post'
+import { groq } from 'next-sanity';
+import { blogSettingsQuery } from '../blog';
+import { postFields, postsQuery } from '../post';
 
 export const homePageQuery = groq`
 {
@@ -10,4 +10,4 @@ export const homePageQuery = groq`
   },
   "recentPosts": ${postsQuery}
 }
-`
+`;

@@ -1,11 +1,11 @@
-import { Heading, Stack, VStack } from '@chakra-ui/react'
-import { PageLayout } from '../../../layouts'
-import { PostsPageProps } from '../../../types'
-import { Pagination } from '../../core'
-import { Posts } from '../../posts'
+import { Heading, Stack, VStack } from '@chakra-ui/react';
+import { PageLayout } from '../../../layouts';
+import { PostsPageProps } from '../../../types';
+import { Pagination } from '../../core';
+import { Posts } from '../../posts';
 
 const PostsPageContent = (props: PostsPageProps) => {
-  const { preview, posts, pagination } = props
+  const { preview, posts, pagination } = props;
   return (
     <PageLayout preview={preview}>
       <VStack
@@ -23,6 +23,6 @@ const PostsPageContent = (props: PostsPageProps) => {
         <Pagination {...pagination} slug={`/posts`} />
       </VStack>
     </PageLayout>
-  )
-}
-export default PostsPageContent
+  );
+};
+export default PostsPageContent;

@@ -1,2 +1,2 @@
-export { default as AuthorHeaderCard } from './AuthorHeaderCard'
-export { default as AuthorHeaderCardSkeleton } from './AuthorHeaderCardSkeleton'
+export { default as AuthorHeaderCard } from './AuthorHeaderCard';
+export { default as AuthorHeaderCardSkeleton } from './AuthorHeaderCardSkeleton';

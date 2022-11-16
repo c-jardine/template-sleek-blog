@@ -1,11 +1,11 @@
-import { groq } from 'next-sanity'
-import { authorPostsQuery, countPostsByAuthor } from '../author'
-import { blogSettingsQuery } from '../blog'
-import { countPostsByCategory } from '../category'
+import { groq } from 'next-sanity';
+import { authorPostsQuery, countPostsByAuthor } from '../author';
+import { blogSettingsQuery } from '../blog';
+import { countPostsByCategory } from '../category';
 
 export const authorSlugsQuery = groq`
 *[_type == "author" && defined(slug.current)][].slug.current
-`
+`;
 
 /**
  * Get an author by its slug.
@@ -15,7 +15,7 @@ export const authorBySlugQuery = groq`
 {
   slug, name, bio, picture, socials->{...}
 }
-`
+`;
 
 /**
  * Get data required for individual post pages. Gets the data for the post and the three most recent posts.
@@ -27,4 +27,4 @@ export const authorPageQuery = groq`
   "totalPosts": ${countPostsByAuthor},
   "posts": ${authorPostsQuery},
   "categories": ${countPostsByCategory}
-}`
+}`;

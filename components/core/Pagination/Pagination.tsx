@@ -1,11 +1,11 @@
-import { Box, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react'
-import { FaChevronLeft } from '@react-icons/all-files/fa/FaChevronLeft'
-import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight'
-import { PaginationButtonProps } from './Pagination.types'
+import { Box, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react';
+import { FaChevronLeft } from '@react-icons/all-files/fa/FaChevronLeft';
+import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight';
+import { PaginationButtonProps } from './Pagination.types';
 
 const Pagination = (props) => {
-  const currentPage = parseInt(props.currentPage)
-  const totalPages = parseInt(props.totalPages)
+  const currentPage = parseInt(props.currentPage);
+  const totalPages = parseInt(props.totalPages);
 
   return (
     <Flex
@@ -67,20 +67,20 @@ const Pagination = (props) => {
         <FaChevronRight size={12} />
       </StyledPageButton>
     </Flex>
-  )
-}
+  );
+};
 
 const PageButton = (props) => {
-  const hasPrevPage = props.currentPage > props.offset
-  const hasNextPage = props.currentPage + props.offset <= props.totalPages
+  const hasPrevPage = props.currentPage > props.offset;
+  const hasNextPage = props.currentPage + props.offset <= props.totalPages;
 
   const link = props.prev
     ? props.currentPage - props.offset
-    : props.currentPage + props.offset
+    : props.currentPage + props.offset;
 
   const content = props.prev
     ? props.currentPage - props.offset
-    : props.currentPage + props.offset
+    : props.currentPage + props.offset;
 
   return (
     <>
@@ -92,8 +92,8 @@ const PageButton = (props) => {
         <Box />
       )}
     </>
-  )
-}
+  );
+};
 
 const StyledPageButton = ({
   children,
@@ -105,7 +105,7 @@ const StyledPageButton = ({
     bg: 'brand.500',
     color: 'white',
     rounded: 'full',
-  }
+  };
 
   return (
     <Flex
@@ -126,7 +126,7 @@ const StyledPageButton = ({
     >
       {children}
     </Flex>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

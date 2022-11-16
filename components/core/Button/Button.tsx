@@ -1,10 +1,10 @@
-import { Box, chakra, Flex, Link, Link as ChakraLink } from '@chakra-ui/react'
-import React from 'react'
+import { Box, chakra, Flex, Link, Link as ChakraLink } from '@chakra-ui/react';
+import React from 'react';
 
 const Button = (props: {
-  variant?: 'light' | 'dark'
-  href?: string
-  children: string | React.ReactNode
+  variant?: 'light' | 'dark';
+  href?: string;
+  children: string | React.ReactNode;
 }) => {
   return (
     <Box
@@ -41,7 +41,7 @@ const Button = (props: {
         <chakra.span>{props.children}</chakra.span>
       </Flex>
     </Box>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

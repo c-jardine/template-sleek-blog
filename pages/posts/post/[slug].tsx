@@ -1,31 +1,31 @@
-import { Text } from '@chakra-ui/react'
-import { ArticleJsonLd, NextSeo, SocialProfileJsonLd } from 'next-seo'
-import ErrorPage from 'next/error'
-import { useRouter } from 'next/router'
-import { PostPageContent } from '../../../components/pages'
+import { Text } from '@chakra-ui/react';
+import { ArticleJsonLd, NextSeo, SocialProfileJsonLd } from 'next-seo';
+import ErrorPage from 'next/error';
+import { useRouter } from 'next/router';
+import { PostPageContent } from '../../../components/pages';
 import {
   postPageQuery,
   postsByAuthorQuery,
   postSlugsQuery,
-} from '../../../lib/groq'
-import { getClient, overlayDrafts, urlForImage } from '../../../lib/sanity'
+} from '../../../lib/groq';
+import { getClient, overlayDrafts, urlForImage } from '../../../lib/sanity';
 import {
   PostPageProps,
   PostPageStaticPathsProps,
   PostPageStaticPropsResponse,
-} from '../../../types'
+} from '../../../types';
 
 const PostPage = (props: PostPageProps) => {
-  const router = useRouter()
-  const { slug, post, blogSettings } = props || {}
-  const { socials } = post?.author || {}
+  const router = useRouter();
+  const { slug, post, blogSettings } = props || {};
+  const { socials } = post?.author || {};
 
   if (!router.isFallback && !slug) {
-    return <ErrorPage statusCode={404} />
+    return <ErrorPage statusCode={404} />;
   }
 
   if (!props) {
-    return <Text>Loading</Text>
+    return <Text>Loading</Text>;
   }
 
   return (
@@ -89,16 +89,16 @@ const PostPage = (props: PostPageProps) => {
       />
       <PostPageContent {...props} />
     </>
-  )
-}
+  );
+};
 
 export const getStaticPaths = async (): Promise<PostPageStaticPathsProps> => {
-  const paths = await getClient(false).fetch(postSlugsQuery)
+  const paths = await getClient(false).fetch(postSlugsQuery);
   return {
     paths: paths.map((slug: string) => ({ params: { slug } })),
     fallback: false,
-  }
-}
+  };
+};
 
 export const getStaticProps = async ({
   params,
@@ -109,14 +109,14 @@ export const getStaticProps = async ({
     preview
   ).fetch(postPageQuery, {
     slug: params.slug,
-  })
+  });
 
   // Fetch the three most recent posts, excluding this one, by the author of this post?.
   // TODO: Move this into main query.
   const postsByAuthor = await getClient(preview).fetch(postsByAuthorQuery, {
     slug: params.slug,
     authorName: post?.author?.name,
-  })
+  });
 
   return {
     props: {
@@ -130,7 +130,7 @@ export const getStaticProps = async ({
     },
     // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
     revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
-  }
-}
+  };
+};
 
-export default PostPage
+export default PostPage;

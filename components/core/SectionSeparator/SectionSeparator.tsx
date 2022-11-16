@@ -1,7 +1,7 @@
-import { Box } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react';
 
 const SectionSeparator = () => {
-  return <Box w="full" style={{ height: 1 }} bg="blackAlpha.200" />
-}
+  return <Box w="full" style={{ height: 1 }} bg="blackAlpha.200" />;
+};
 
-export default SectionSeparator
+export default SectionSeparator;

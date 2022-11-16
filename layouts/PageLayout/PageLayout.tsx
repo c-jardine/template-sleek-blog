@@ -1,5 +1,5 @@
-import { Box, Stack } from '@chakra-ui/react'
-import { Alert } from '../../components/core/Alert'
+import { Box, Stack } from '@chakra-ui/react';
+import { Alert } from '../../components/core/Alert';
 
 const PageLayout = ({ preview, children }) => {
   return (
@@ -11,7 +11,7 @@ const PageLayout = ({ preview, children }) => {
         </Stack>
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default PageLayout
+export default PageLayout;

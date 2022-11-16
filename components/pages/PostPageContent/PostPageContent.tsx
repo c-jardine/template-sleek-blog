@@ -1,7 +1,7 @@
-import { Box, Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { PageLayout } from '../../../layouts'
-import { PostPageProps } from '../../../types'
+import { Box, Grid, GridItem, Stack, VStack } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { PageLayout } from '../../../layouts';
+import { PostPageProps } from '../../../types';
 import {
   AuthorCard,
   AuthorSocials,
@@ -10,12 +10,12 @@ import {
   PostHeader,
   Posts,
   PostsByAuthorCard,
-} from '../../posts'
+} from '../../posts';
 
 const PostPageContent = (props: PostPageProps) => {
-  const router = useRouter()
+  const router = useRouter();
 
-  const { post, slug, recentPosts, categories, preview, blogSettings } = props
+  const { post, slug, recentPosts, categories, preview, blogSettings } = props;
 
   return (
     <PageLayout preview={preview}>
@@ -59,7 +59,7 @@ const PostPageContent = (props: PostPageProps) => {
         </VStack>
       </Box>
     </PageLayout>
-  )
-}
+  );
+};
 
-export default PostPageContent
+export default PostPageContent;

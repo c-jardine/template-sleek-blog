@@ -1,5 +1,5 @@
 export interface PaginationHelperProps {
-  start: number
-  end: number
-  totalPages: number
+  start: number;
+  end: number;
+  totalPages: number;
 }

@@ -1,1 +1,1 @@
-export { default as AuthorSocials } from './AuthorSocials'
+export { default as AuthorSocials } from './AuthorSocials';

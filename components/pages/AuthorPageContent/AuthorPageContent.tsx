@@ -1,16 +1,16 @@
-import { Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
-import { PageLayout } from '../../../layouts'
-import { AuthorPageProps } from '../../../types'
-import { Pagination } from '../../core'
+import { Grid, GridItem, Stack, VStack } from '@chakra-ui/react';
+import { PageLayout } from '../../../layouts';
+import { AuthorPageProps } from '../../../types';
+import { Pagination } from '../../core';
 import {
   AuthorCard,
   AuthorPosts,
   AuthorSocials,
   CategoryPostsCard,
-} from '../../posts'
+} from '../../posts';
 
 const AuthorPageContent = (props: AuthorPageProps) => {
-  const { preview, posts, pagination, slug, author, categories } = props
+  const { preview, posts, pagination, slug, author, categories } = props;
   return (
     <PageLayout preview={preview}>
       <VStack spacing={28}>
@@ -42,6 +42,6 @@ const AuthorPageContent = (props: AuthorPageProps) => {
         </Grid>
       </VStack>
     </PageLayout>
-  )
-}
-export default AuthorPageContent
+  );
+};
+export default AuthorPageContent;

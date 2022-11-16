@@ -1,4 +1,4 @@
 export interface CategoryPostsCardProps {
-  label: string
-  posts: number
+  label: string;
+  posts: number;
 }

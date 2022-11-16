@@ -1,1 +1,1 @@
-export { default as PostBody } from './PostBody'
+export { default as PostBody } from './PostBody';

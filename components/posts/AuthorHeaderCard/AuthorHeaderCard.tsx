@@ -6,17 +6,17 @@ import {
   Link,
   Stack,
   Text,
-} from '@chakra-ui/react'
-import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF'
-import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
-import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
-import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube'
-import { urlForImage } from '../../../lib/sanity'
-import { AuthorProps } from '../../../types'
-import { SectionSeparator } from '../../core'
+} from '@chakra-ui/react';
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
+import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram';
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
+import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube';
+import { urlForImage } from '../../../lib/sanity';
+import { AuthorProps } from '../../../types';
+import { SectionSeparator } from '../../core';
 
 const AuthorHeaderCard = (props: AuthorProps) => {
-  const { picture, name, bio, socials } = props || {}
+  const { picture, name, bio, socials } = props || {};
   return (
     <Grid
       templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
@@ -124,7 +124,7 @@ const AuthorHeaderCard = (props: AuthorProps) => {
         </Stack>
       </GridItem>
     </Grid>
-  )
-}
+  );
+};
 
-export default AuthorHeaderCard
+export default AuthorHeaderCard;

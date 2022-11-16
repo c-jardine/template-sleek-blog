@@ -1,5 +1,5 @@
-import { LinkIcon } from '@sanity/icons'
-import { defineType } from 'sanity'
+import { LinkIcon } from '@sanity/icons';
+import { defineType } from 'sanity';
 
 export default defineType({
   name: 'socials',
@@ -28,4 +28,4 @@ export default defineType({
       type: 'string',
     },
   ],
-})
+});

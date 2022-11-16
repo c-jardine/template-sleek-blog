@@ -6,8 +6,8 @@ import {
   Stack,
   Text,
   VStack,
-} from '@chakra-ui/react'
-import React from 'react'
+} from '@chakra-ui/react';
+import React from 'react';
 
 const CardSkeleton = () => {
   return (
@@ -28,7 +28,7 @@ const CardSkeleton = () => {
         <Skeleton w={32} h={12} />
       </Stack>
     </VStack>
-  )
-}
+  );
+};
 
-export default CardSkeleton
+export default CardSkeleton;

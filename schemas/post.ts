@@ -1,8 +1,8 @@
-import { BookIcon } from '@sanity/icons'
-import { defineType } from 'sanity'
+import { BookIcon } from '@sanity/icons';
+import { defineType } from 'sanity';
 
-import authorType from './author'
-import categoryType from './category'
+import authorType from './author';
+import categoryType from './category';
 
 /**
  * This file is the schema definition for a post.
@@ -83,8 +83,8 @@ export default defineType({
       media: 'coverImage',
     },
     prepare(selection) {
-      const { author } = selection
-      return { ...selection, subtitle: author && `by ${author}` }
+      const { author } = selection;
+      return { ...selection, subtitle: author && `by ${author}` };
     },
   },
-})
+});

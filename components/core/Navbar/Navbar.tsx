@@ -10,11 +10,11 @@ import {
   Text,
   useColorModeValue,
   useDisclosure,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 // Here we have used react-icons package for the icons
-import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose'
-import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu'
-import { RiFlashlightFill } from '@react-icons/all-files/ri/RiFlashlightFill'
+import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
+import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
+import { RiFlashlightFill } from '@react-icons/all-files/ri/RiFlashlightFill';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -22,10 +22,10 @@ const navLinks = [
   { name: 'Work', path: '/work' },
   { name: 'Pricing', path: '/pricing' },
   { name: 'Contact', path: '/contact' },
-]
+];
 
 const Navbar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
@@ -82,14 +82,14 @@ const Navbar = () => {
         </Box>
       ) : null}
     </Box>
-  )
-}
+  );
+};
 
 // NavLink Component
 interface NavLinkProps {
-  name: string
-  path: string
-  onClose: () => void
+  name: string;
+  path: string;
+  onClose: () => void;
 }
 
 const NavLink = ({ name, path, onClose }: NavLinkProps) => {
@@ -105,14 +105,14 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
     >
       {name}
     </Link>
-  )
-}
+  );
+};
 
 // Dropdown MenuLink Component
 interface MenuLinkProps {
-  name: string
-  path: string
-  onClose: () => void
+  name: string;
+  path: string;
+  onClose: () => void;
 }
 
 const MenuLink = ({ name, path, onClose }: MenuLinkProps) => {
@@ -127,7 +127,7 @@ const MenuLink = ({ name, path, onClose }: MenuLinkProps) => {
         <Text>{name}</Text>
       </MenuItem>
     </Link>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

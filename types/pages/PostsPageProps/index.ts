@@ -1,17 +1,17 @@
-import { PageProps } from '..'
-import { PaginationProps, PostProps } from '../../primitives'
+import { PageProps } from '..';
+import { PaginationProps, PostProps } from '../../primitives';
 
 export interface PostsPageProps extends PageProps {
-  posts: PostProps[]
-  pagination: PaginationProps
+  posts: PostProps[];
+  pagination: PaginationProps;
 }
 
 export interface PostsPageStaticPathsResponse {
-  paths: { params: { page: string } }[]
-  fallback: boolean
+  paths: { params: { page: string } }[];
+  fallback: boolean;
 }
 
 export interface PostsPageStaticPropsResponse {
-  props: PostsPageProps
-  revalidate: number
+  props: PostsPageProps;
+  revalidate: number;
 }

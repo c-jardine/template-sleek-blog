@@ -6,17 +6,17 @@ import {
   Link,
   Text,
   VStack,
-} from '@chakra-ui/react'
-import { PortableTextReactComponents } from '@portabletext/react'
-import { FaQuoteLeft } from '@react-icons/all-files/fa/FaQuoteLeft'
-import { FaQuoteRight } from '@react-icons/all-files/fa/FaQuoteRight'
+} from '@chakra-ui/react';
+import { PortableTextReactComponents } from '@portabletext/react';
+import { FaQuoteLeft } from '@react-icons/all-files/fa/FaQuoteLeft';
+import { FaQuoteRight } from '@react-icons/all-files/fa/FaQuoteRight';
 
 const PortableTextComponents: Partial<PortableTextReactComponents> = {
   marks: {
     link: ({ value, children }) => {
       const target = (value?.href || '').startsWith('http')
         ? '_blank'
-        : undefined
+        : undefined;
       return (
         <Link
           href={value?.href}
@@ -27,7 +27,7 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
             {children}
           </chakra.span>
         </Link>
-      )
+      );
     },
   },
   block: {
@@ -95,6 +95,6 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
       </chakra.ol>
     ),
   },
-}
+};
 
-export default PortableTextComponents
+export default PortableTextComponents;

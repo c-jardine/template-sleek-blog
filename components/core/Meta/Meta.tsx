@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import { CMS_NAME, HOME_OG_IMAGE_URL } from '../../../lib/sanity'
+import Head from 'next/head';
+import { CMS_NAME, HOME_OG_IMAGE_URL } from '../../../lib/sanity';
 
 const Meta = () => {
   return (
@@ -38,7 +38,7 @@ const Meta = () => {
       />
       <meta property="og:image" content={HOME_OG_IMAGE_URL} key="ogImage" />
     </Head>
-  )
-}
+  );
+};
 
-export default Meta
+export default Meta;

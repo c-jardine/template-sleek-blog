@@ -1,8 +1,8 @@
-import { Box, Image, Stack, Text } from '@chakra-ui/react'
-import { format } from 'date-fns'
-import { urlForImage } from '../../../lib/sanity'
-import { PostProps } from '../../../types'
-import { SectionSeparator } from '../../core'
+import { Box, Image, Stack, Text } from '@chakra-ui/react';
+import { format } from 'date-fns';
+import { urlForImage } from '../../../lib/sanity';
+import { PostProps } from '../../../types';
+import { SectionSeparator } from '../../core';
 
 const PostsByAuthorCard = (props: { posts: PostProps[]; author: string }) => {
   return (
@@ -43,7 +43,7 @@ const PostsByAuthorCard = (props: { posts: PostProps[]; author: string }) => {
         </Stack>
       ))}
     </Stack>
-  )
-}
+  );
+};
 
-export default PostsByAuthorCard
+export default PostsByAuthorCard;

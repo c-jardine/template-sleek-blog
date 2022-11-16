@@ -1,5 +1,5 @@
-import { Head, Html, Main, NextScript } from 'next/document'
-import { ServerStyleSheetDocument } from 'next-sanity/studio'
+import { Head, Html, Main, NextScript } from 'next/document';
+import { ServerStyleSheetDocument } from 'next-sanity/studio';
 
 export default class Document extends ServerStyleSheetDocument {
   render() {
@@ -11,6 +11,6 @@ export default class Document extends ServerStyleSheetDocument {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }

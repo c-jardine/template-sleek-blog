@@ -1,1 +1,1 @@
-export { default as SectionSeparator } from './SectionSeparator'
+export { default as SectionSeparator } from './SectionSeparator';

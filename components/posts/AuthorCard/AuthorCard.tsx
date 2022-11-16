@@ -1,10 +1,10 @@
-import { Box, Image, Stack, Text } from '@chakra-ui/react'
-import { urlForImage } from '../../../lib/sanity'
-import { AuthorProps } from '../../../types'
-import { SectionSeparator } from '../../core'
+import { Box, Image, Stack, Text } from '@chakra-ui/react';
+import { urlForImage } from '../../../lib/sanity';
+import { AuthorProps } from '../../../types';
+import { SectionSeparator } from '../../core';
 
 const AuthorCard = (props: AuthorProps) => {
-  const { picture, name, bio } = props || {}
+  const { picture, name, bio } = props || {};
   return (
     <Stack bg="white" w="full" shadow="md" p={8} spacing={8}>
       <Text
@@ -44,7 +44,7 @@ const AuthorCard = (props: AuthorProps) => {
         </Text>
       </Stack>
     </Stack>
-  )
-}
+  );
+};
 
-export default AuthorCard
+export default AuthorCard;

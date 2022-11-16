@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Header = ({ title }) => {
   return (
@@ -7,7 +7,7 @@ const Header = ({ title }) => {
         {title}
       </Link>
     </h2>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

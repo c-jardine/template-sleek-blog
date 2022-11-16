@@ -1,6 +1,6 @@
-import { Container } from '@chakra-ui/react'
-import cn from 'classnames'
-import Link from 'next/link'
+import { Container } from '@chakra-ui/react';
+import cn from 'classnames';
+import Link from 'next/link';
 
 const Alert = ({ preview }) => {
   return (
@@ -27,7 +27,7 @@ const Alert = ({ preview }) => {
         </div>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Alert
+export default Alert;

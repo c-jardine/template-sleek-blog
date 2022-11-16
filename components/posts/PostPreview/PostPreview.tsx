@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { PostProps } from '../../../types'
-import { CoverImage, Date } from '../../core'
+import Link from 'next/link';
+import { PostProps } from '../../../types';
+import { CoverImage, Date } from '../../core';
 
 const PostPreview = ({
   title,
@@ -26,7 +26,7 @@ const PostPreview = ({
       <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>
       {/* {author && <Avatar name={author.name} picture={author.picture} />} */}
     </div>
-  )
-}
+  );
+};
 
-export default PostPreview
+export default PostPreview;

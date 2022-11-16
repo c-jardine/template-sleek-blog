@@ -5,7 +5,7 @@ const BlogHeader = ({ title }) => {
         {title}
       </h1>
     </section>
-  )
-}
+  );
+};
 
-export default BlogHeader
+export default BlogHeader;

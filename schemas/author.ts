@@ -1,6 +1,6 @@
-import { UserIcon } from '@sanity/icons'
-import { defineType } from 'sanity'
-import socialsType from './socials'
+import { UserIcon } from '@sanity/icons';
+import { defineType } from 'sanity';
+import socialsType from './socials';
 
 export default defineType({
   name: 'author',
@@ -43,4 +43,4 @@ export default defineType({
       to: [{ type: socialsType.name }],
     },
   ],
-})
+});

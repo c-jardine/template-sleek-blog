@@ -1,10 +1,10 @@
-import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react'
-import { format, parseISO } from 'date-fns'
-import { PostProps } from '../../../types'
-import { CoverImage } from '../../core'
+import { Box, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { format, parseISO } from 'date-fns';
+import { PostProps } from '../../../types';
+import { CoverImage } from '../../core';
 
 const PostHeader = (props: PostProps) => {
-  const { title, coverImage, date, author, category, slug } = props
+  const { title, coverImage, date, author, category, slug } = props;
   return (
     <>
       <Flex justifyContent="center">
@@ -36,7 +36,7 @@ const PostHeader = (props: PostProps) => {
         <CoverImage title={title} image={coverImage} priority />
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default PostHeader
+export default PostHeader;

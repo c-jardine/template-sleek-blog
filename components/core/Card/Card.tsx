@@ -7,16 +7,16 @@ import {
   Stack,
   Text,
   VStack,
-} from '@chakra-ui/react'
-import { format } from 'date-fns'
-import { PostProps } from '../../../types'
+} from '@chakra-ui/react';
+import { format } from 'date-fns';
+import { PostProps } from '../../../types';
 
-import { urlForImage } from '../../../lib/sanity'
-import { Button } from '../Button'
+import { urlForImage } from '../../../lib/sanity';
+import { Button } from '../Button';
 
 const Card = (props: PostProps) => {
   const { slug, title, excerpt, coverImage, isHero, category, date, author } =
-    props || {}
+    props || {};
   return (
     <VStack spacing={0} w="full" bg="white" shadow="md">
       <Box
@@ -99,7 +99,7 @@ const Card = (props: PostProps) => {
         </Flex>
       </Stack>
     </VStack>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

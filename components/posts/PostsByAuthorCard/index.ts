@@ -1,1 +1,1 @@
-export { default as PostsByAuthorCard } from './PostsByAuthorCard'
+export { default as PostsByAuthorCard } from './PostsByAuthorCard';

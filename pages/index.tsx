@@ -1,15 +1,23 @@
-import { Box, Heading, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react'
-import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight'
-import { NextSeo } from 'next-seo'
-import { Card } from '../components/core'
-import { PageLayout } from '../layouts'
-import { Posts } from '../components/posts'
-import { homePageQuery } from '../lib/groq'
-import { getClient, urlForImage } from '../lib/sanity'
-import { HomePageProps, HomePageStaticPropsResponse } from '../types'
+import {
+  Box,
+  Heading,
+  Icon,
+  Link,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight';
+import { NextSeo } from 'next-seo';
+import { Card } from '../components/core';
+import { PageLayout } from '../layouts';
+import { Posts } from '../components/posts';
+import { homePageQuery } from '../lib/groq';
+import { getClient, urlForImage } from '../lib/sanity';
+import { HomePageProps, HomePageStaticPropsResponse } from '../types';
 
 const HomePage = (props: HomePageProps) => {
-  const { preview, blogSettings, featuredPost, recentPosts } = props
+  const { preview, blogSettings, featuredPost, recentPosts } = props;
 
   return (
     <>
@@ -80,8 +88,8 @@ const HomePage = (props: HomePageProps) => {
         </VStack>
       </PageLayout>
     </>
-  )
-}
+  );
+};
 
 export async function getStaticProps({
   preview = false,
@@ -93,14 +101,14 @@ export async function getStaticProps({
       slug: '',
       start: 1,
       end: 4,
-    })
+    });
 
     return {
       props: { ...data, preview },
       // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
       revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
-    }
+    };
   }
 }
 
-export default HomePage
+export default HomePage;

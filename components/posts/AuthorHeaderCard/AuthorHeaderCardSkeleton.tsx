@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {
   Grid,
   GridItem,
@@ -8,8 +8,8 @@ import {
   SkeletonCircle,
   Stack,
   Text,
-} from '@chakra-ui/react'
-import { SectionSeparator } from '../../core'
+} from '@chakra-ui/react';
+import { SectionSeparator } from '../../core';
 
 const AuthorHeaderCardSkeleton = () => {
   return (
@@ -52,7 +52,7 @@ const AuthorHeaderCardSkeleton = () => {
         </Stack>
       </GridItem>
     </Grid>
-  )
-}
+  );
+};
 
-export default AuthorHeaderCardSkeleton
+export default AuthorHeaderCardSkeleton;

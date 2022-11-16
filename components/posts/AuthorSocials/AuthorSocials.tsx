@@ -1,10 +1,10 @@
-import { HStack, Link, Stack, Text } from '@chakra-ui/react'
-import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF'
-import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram'
-import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter'
-import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube'
-import { AuthorProps } from '../../../types'
-import { SectionSeparator } from '../../core'
+import { HStack, Link, Stack, Text } from '@chakra-ui/react';
+import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
+import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram';
+import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
+import { FaYoutube } from '@react-icons/all-files/fa/FaYoutube';
+import { AuthorProps } from '../../../types';
+import { SectionSeparator } from '../../core';
 
 const AuthorCard = (props: AuthorProps) => {
   return (
@@ -83,7 +83,7 @@ const AuthorCard = (props: AuthorProps) => {
         )}
       </HStack>
     </Stack>
-  )
-}
+  );
+};
 
-export default AuthorCard
+export default AuthorCard;

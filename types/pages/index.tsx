@@ -1,6 +1,6 @@
-import { BlogSettingsProps } from '../primitives'
+import { BlogSettingsProps } from '../primitives';
 
 export interface PageProps {
-  preview: boolean
-  blogSettings: BlogSettingsProps
+  preview: boolean;
+  blogSettings: BlogSettingsProps;
 }

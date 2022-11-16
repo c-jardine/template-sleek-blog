@@ -2,20 +2,20 @@
  * This config is used to set up Sanity Studio that's mounted on the `/pages/studio/[[...index]].tsx` route
  */
 
-import { visionTool } from '@sanity/vision'
-import { defineConfig, Slug } from 'sanity'
-import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
-import { deskTool } from 'sanity/desk'
+import { visionTool } from '@sanity/vision';
+import { defineConfig, Slug } from 'sanity';
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash';
+import { deskTool } from 'sanity/desk';
 
-import { PostsPreview } from './components/posts/PostsPreview'
-import authorType from './schemas/author'
-import categoryType from './schemas/category'
-import postType from './schemas/post'
-import settingsType from './schemas/settings'
-import socialsType from './schemas/socials'
+import { PostsPreview } from './components/posts/PostsPreview';
+import authorType from './schemas/author';
+import categoryType from './schemas/category';
+import postType from './schemas/post';
+import settingsType from './schemas/settings';
+import socialsType from './schemas/socials';
 
 // @TODO: update next-sanity/studio to automatically set this when needed
-const basePath = '/studio'
+const basePath = '/studio';
 
 const config = defineConfig({
   basePath,
@@ -39,16 +39,16 @@ const config = defineConfig({
                 .id(settingsType.name)
                 .schemaType(settingsType.name)
                 .documentId(settingsType.name)
-            )
+            );
 
         // The default root list items (except custom ones)
         const defaultListItems = S.documentTypeListItems().filter(
           (listItem) => listItem.getId() !== settingsType.name
-        )
+        );
 
         return S.list()
           .title('Content')
-          .items([settingsListItem, S.divider(), ...defaultListItems])
+          .items([settingsListItem, S.divider(), ...defaultListItems]);
       },
 
       // `defaultDocumentNode is responsible for adding a “Preview” tab to the document pane
@@ -61,10 +61,10 @@ const config = defineConfig({
           return S.document().views([
             S.view.form(),
             S.view.component(PostsPreview).title('Preview'),
-          ])
+          ]);
         }
 
-        return null
+        return null;
       },
     }),
     // Add an image asset source for Unsplash
@@ -77,25 +77,25 @@ const config = defineConfig({
   ],
   document: {
     productionUrl: async (prev, { document }) => {
-      const url = new URL('/api/preview', location.origin)
-      const secret = process.env.NEXT_PUBLIC_PREVIEW_SECRET
+      const url = new URL('/api/preview', location.origin);
+      const secret = process.env.NEXT_PUBLIC_PREVIEW_SECRET;
       if (secret) {
-        url.searchParams.set('secret', secret)
+        url.searchParams.set('secret', secret);
       }
 
       try {
         switch (document._type) {
           case settingsType.name:
-            break
+            break;
           case postType.name:
-            url.searchParams.set('slug', (document.slug as Slug).current!)
-            break
+            url.searchParams.set('slug', (document.slug as Slug).current!);
+            break;
           default:
-            return prev
+            return prev;
         }
-        return url.toString()
+        return url.toString();
       } catch {
-        return prev
+        return prev;
       }
     },
     // Hide 'Settings' from new document options
@@ -104,20 +104,20 @@ const config = defineConfig({
       if (creationContext.type === 'global') {
         return prev.filter(
           (templateItem) => templateItem.templateId !== settingsType.name
-        )
+        );
       }
 
-      return prev
+      return prev;
     },
     // Removes the "duplicate" action on the "settings" singleton
     actions: (prev, { schemaType }) => {
       if (schemaType === settingsType.name) {
-        return prev.filter(({ action }) => action !== 'duplicate')
+        return prev.filter(({ action }) => action !== 'duplicate');
       }
 
-      return prev
+      return prev;
     },
   },
-})
+});
 
-export default config
+export default config;

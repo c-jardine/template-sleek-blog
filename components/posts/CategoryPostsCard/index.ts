@@ -1,2 +1,2 @@
-export { default as CategoryPostsCard } from './CategoryPostsCard'
-export * from './CategoryPostsCard.types'
+export { default as CategoryPostsCard } from './CategoryPostsCard';
+export * from './CategoryPostsCard.types';

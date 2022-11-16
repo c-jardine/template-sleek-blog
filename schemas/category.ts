@@ -1,5 +1,5 @@
-import { TagIcon } from '@sanity/icons'
-import { defineType } from 'sanity'
+import { TagIcon } from '@sanity/icons';
+import { defineType } from 'sanity';
 
 /**
  * This file is the schema definition for a post.
@@ -36,4 +36,4 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
   ],
-})
+});

@@ -1,7 +1,7 @@
-import { chakra, Link, Stack, Text } from '@chakra-ui/react'
-import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight'
-import { SectionSeparator } from '../../core'
-import { CategoryPostsCardProps } from './CategoryPostsCard.types'
+import { chakra, Link, Stack, Text } from '@chakra-ui/react';
+import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight';
+import { SectionSeparator } from '../../core';
+import { CategoryPostsCardProps } from './CategoryPostsCard.types';
 
 const CategoryPostsCard = (props: { data: CategoryPostsCardProps[] }) => {
   return (
@@ -45,7 +45,7 @@ const CategoryPostsCard = (props: { data: CategoryPostsCardProps[] }) => {
         ))}
       </Stack>
     </Stack>
-  )
-}
+  );
+};
 
-export default CategoryPostsCard
+export default CategoryPostsCard;

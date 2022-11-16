@@ -1,10 +1,10 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
-import { urlForImage } from '../../../lib/sanity'
-import { AuthorProps } from '../../../types'
+import { urlForImage } from '../../../lib/sanity';
+import { AuthorProps } from '../../../types';
 
 const Avatar = (props: AuthorProps) => {
-  const { name, picture } = props || {}
+  const { name, picture } = props || {};
   return (
     <div className="flex items-center">
       <div className="relative mr-4 h-12 w-12">
@@ -21,7 +21,7 @@ const Avatar = (props: AuthorProps) => {
       </div>
       <div className="text-xl font-bold">{name}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Avatar
+export default Avatar;

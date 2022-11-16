@@ -1,5 +1,5 @@
-import { CogIcon } from '@sanity/icons'
-import { defineType } from 'sanity'
+import { CogIcon } from '@sanity/icons';
+import { defineType } from 'sanity';
 
 export default defineType({
   name: 'settings',
@@ -39,4 +39,4 @@ export default defineType({
       validation: (rule) => rule.required(),
     },
   ],
-})
+});
