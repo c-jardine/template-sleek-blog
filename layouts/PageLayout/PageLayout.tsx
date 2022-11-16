@@ -1,7 +1,7 @@
 import { Box, Stack } from '@chakra-ui/react'
-import { Alert } from './core/Alert'
+import { Alert } from '../../components/core/Alert'
 
-export default function Layout({ preview, children }) {
+const PageLayout = ({ preview, children }) => {
   return (
     <>
       <Box bg="blackAlpha.50">
@@ -13,3 +13,5 @@ export default function Layout({ preview, children }) {
     </>
   )
 }
+
+export default PageLayout

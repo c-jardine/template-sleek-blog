@@ -1,8 +1,5 @@
-import { Heading, Stack, VStack } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
-import { Pagination } from '../../components/core'
-import Layout from '../../components/layout'
-import { Posts } from '../../components/posts'
+import { PostsPageContent } from '../../components/pages'
 import { countAllPostsQuery, postsPageQuery } from '../../lib/groq'
 import { pagination } from '../../lib/helpers'
 import { getClient } from '../../lib/sanity'
@@ -15,7 +12,7 @@ import {
 const RESULTS_PER_PAGE = 6
 
 const PostsPage = (props: PostsPageProps) => {
-  const { preview, blogSettings, posts, pagination } = props
+  const { blogSettings } = props
 
   return (
     <>
@@ -46,22 +43,7 @@ const PostsPage = (props: PostsPageProps) => {
           cardType: 'summary_large_image',
         }}
       />
-      <Layout preview={preview}>
-        <VStack
-          spacing={28}
-          w="full"
-          maxW="8xl"
-          mx="auto"
-          justifyContent="center"
-          px={4}
-        >
-          <Stack spacing={16}>
-            <Heading textStyle={['h2', 'gradient']}>All posts</Heading>
-            {posts.length > 0 && <Posts posts={posts} />}
-          </Stack>
-          <Pagination {...pagination} slug={`/posts`} />
-        </VStack>
-      </Layout>
+      <PostsPageContent {...props} />
     </>
   )
 }

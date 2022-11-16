@@ -1,7 +1,7 @@
 import { Box, Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import { PageLayout } from '../../../layouts'
 import { PostPageProps } from '../../../types'
-import Layout from '../../layout'
 import {
   AuthorCard,
   AuthorSocials,
@@ -18,7 +18,7 @@ const PostPageContent = (props: PostPageProps) => {
   const { post, slug, recentPosts, categories, preview, blogSettings } = props
 
   return (
-    <Layout preview={preview}>
+    <PageLayout preview={preview}>
       <Box>
         <VStack spacing={28}>
           <Grid
@@ -58,7 +58,7 @@ const PostPageContent = (props: PostPageProps) => {
           <Box>{recentPosts.length > 0 && <Posts posts={recentPosts} />}</Box>
         </VStack>
       </Box>
-    </Layout>
+    </PageLayout>
   )
 }
 

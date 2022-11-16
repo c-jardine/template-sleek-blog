@@ -2,7 +2,7 @@ import { Box, Heading, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react'
 import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight'
 import { NextSeo } from 'next-seo'
 import { Card } from '../components/core'
-import Layout from '../components/layout'
+import { PageLayout } from '../layouts'
 import { Posts } from '../components/posts'
 import { homePageQuery } from '../lib/groq'
 import { getClient, urlForImage } from '../lib/sanity'
@@ -40,7 +40,7 @@ const HomePage = (props: HomePageProps) => {
           cardType: 'summary_large_image',
         }}
       />
-      <Layout preview={preview}>
+      <PageLayout preview={preview}>
         <VStack
           spacing={28}
           w="full"
@@ -78,7 +78,7 @@ const HomePage = (props: HomePageProps) => {
             </Link>
           </Stack>
         </VStack>
-      </Layout>
+      </PageLayout>
     </>
   )
 }

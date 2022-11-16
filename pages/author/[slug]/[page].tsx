@@ -1,13 +1,5 @@
-import { Grid, GridItem, Stack, VStack } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
-import { Pagination } from '../../../components/core'
-import Layout from '../../../components/layout'
-import {
-  AuthorCard,
-  AuthorPosts,
-  AuthorSocials,
-  CategoryPostsCard,
-} from '../../../components/posts'
+import { AuthorPageContent } from '../../../components/pages'
 import {
   authorPageQuery,
   authorSlugsQuery,
@@ -23,8 +15,7 @@ import {
 const RESULTS_PER_PAGE = 4
 
 const AuthorPage = (props: AuthorPageProps) => {
-  const { preview, slug, blogSettings, author, posts, categories, pagination } =
-    props
+  const { blogSettings, author } = props
 
   const [firstName, lastName] = author?.name.split(' ')
 
@@ -61,36 +52,7 @@ const AuthorPage = (props: AuthorPageProps) => {
           cardType: 'summary_large_image',
         }}
       />
-      <Layout preview={preview}>
-        <VStack spacing={28}>
-          <Grid
-            templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
-            maxW="8xl"
-            gap={8}
-            w="full"
-            mx="auto"
-            px={4}
-          >
-            <GridItem colSpan={{ base: 1, lg: 2 }}>
-              <VStack spacing={28}>
-                <Stack spacing={8}>
-                  <AuthorPosts preview={preview} posts={posts} />
-                  <Pagination {...pagination} slug={`/author/${slug}`} />
-                </Stack>
-              </VStack>
-            </GridItem>
-            <GridItem as={Stack} spacing={16}>
-              {author && (
-                <>
-                  <AuthorCard {...author} />
-                  <AuthorSocials {...author} />
-                  <CategoryPostsCard data={categories} />
-                </>
-              )}
-            </GridItem>
-          </Grid>
-        </VStack>
-      </Layout>
+      <AuthorPageContent {...props} />
     </>
   )
 }
