@@ -1,6 +1,5 @@
 import { Text } from '@chakra-ui/react';
 import { ArticleJsonLd, NextSeo, SocialProfileJsonLd } from 'next-seo';
-import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import { PostPageContent } from '../../../components/pages';
 import {

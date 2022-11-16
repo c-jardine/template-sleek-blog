@@ -1,4 +1,4 @@
-import { Box, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Flex, Link, SimpleGrid } from '@chakra-ui/react';
 import { FaChevronLeft } from '@react-icons/all-files/fa/FaChevronLeft';
 import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight';
 import { PaginationButtonProps } from './Pagination.types';

@@ -1,5 +1,4 @@
 import { Grid, HStack } from '@chakra-ui/react';
-import { urlForImage } from '../../../lib/sanity';
 import { PostProps } from '../../../types';
 import { Card, CardSkeleton } from '../../core';
 

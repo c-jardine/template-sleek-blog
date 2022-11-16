@@ -1,10 +1,4 @@
-import {
-  chakra,
-  Link,
-  Stack,
-  Text,
-  Link as ChakraLink,
-} from '@chakra-ui/react';
+import { chakra, Link as ChakraLink, Stack, Text } from '@chakra-ui/react';
 import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight';
 import { SectionSeparator } from '../../core';
 import { CategoryPostsCardProps } from './CategoryPostsCard.types';

@@ -10,8 +10,8 @@ import {
 import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight';
 import { NextSeo } from 'next-seo';
 import { Card } from '../components/core';
-import { PageLayout } from '../layouts';
 import { Posts } from '../components/posts';
+import { PageLayout } from '../layouts';
 import { homePageQuery } from '../lib/groq';
 import { getClient, urlForImage } from '../lib/sanity';
 import { HomePageProps, HomePageStaticPropsResponse } from '../types';

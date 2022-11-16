@@ -1,5 +1,4 @@
-import { Box, Container } from '@chakra-ui/react';
-import Link from 'next/link';
+import { Box, Container, Link } from '@chakra-ui/react';
 
 const Alert = ({ preview }) => {
   return (
@@ -9,13 +8,8 @@ const Alert = ({ preview }) => {
           {preview && (
             <>
               This page is a preview.{' '}
-              <Link
-                href="/api/exit-preview"
-                className="underline transition-colors duration-200 hover:text-cyan"
-              >
-                Click here
-              </Link>{' '}
-              to exit preview mode.
+              <Link href="/api/exit-preview">Click here</Link> to exit preview
+              mode.
             </>
           )}
         </Box>

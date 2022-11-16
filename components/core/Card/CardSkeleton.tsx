@@ -1,13 +1,4 @@
-import {
-  chakra,
-  Box,
-  Flex,
-  Skeleton,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import React from 'react';
+import { Flex, Skeleton, Stack, VStack } from '@chakra-ui/react';
 
 const CardSkeleton = () => {
   return (

@@ -1,10 +1,10 @@
 import {
   Box,
+  chakra,
   Image,
+  Link as ChakraLink,
   Stack,
   Text,
-  Link as ChakraLink,
-  chakra,
 } from '@chakra-ui/react';
 import { format } from 'date-fns';
 import { urlForImage } from '../../../lib/sanity';

@@ -33,6 +33,8 @@ const Card = (props: PostProps) => {
               ? urlForImage(coverImage).width(1920).url()
               : urlForImage(coverImage).width(992).url()
           }
+          width={isHero ? 1920 : 992}
+          height="auto"
           alt=""
           objectFit="cover"
           transition="250ms ease-in-out"

@@ -1,5 +1,4 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
-import { urlForImage } from '../../../lib/sanity';
 import { PostProps } from '../../../types';
 import { Card } from '../../core';
 

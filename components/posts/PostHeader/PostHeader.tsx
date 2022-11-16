@@ -33,7 +33,7 @@ const PostHeader = (props: PostProps) => {
         </Link>
       </Flex>
       <Box mt={12}>
-        <CoverImage title={title} image={coverImage} priority />
+        <CoverImage title={title} image={coverImage} />
       </Box>
     </>
   );

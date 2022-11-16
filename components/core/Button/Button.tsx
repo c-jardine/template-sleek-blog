@@ -1,4 +1,4 @@
-import { Box, chakra, Flex, Link, Link as ChakraLink } from '@chakra-ui/react';
+import { Box, chakra, Flex, Link as ChakraLink } from '@chakra-ui/react';
 import React from 'react';
 
 const Button = (props: {

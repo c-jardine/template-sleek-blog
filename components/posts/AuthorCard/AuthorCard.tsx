@@ -23,6 +23,7 @@ const AuthorCard = (props: AuthorProps) => {
           src={picture?.asset?._ref && urlForImage(picture).url()}
           alt="Author image"
           w="full"
+          maxW={960}
           maxH={52}
           objectFit="cover"
           objectPosition="center"
