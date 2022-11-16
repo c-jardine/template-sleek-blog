@@ -1,4 +1,15 @@
-import { Box, Grid, GridItem, Stack, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Grid,
+  GridItem,
+  Heading,
+  Icon,
+  Link,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight';
 import { PageLayout } from '../../../layouts';
 import { PostPageProps } from '../../../types';
 import {
@@ -17,7 +28,7 @@ const PostPageContent = (props: PostPageProps) => {
   return (
     <PageLayout preview={preview}>
       <Box>
-        <VStack spacing={28}>
+        <VStack spacing={28} px={4}>
           <Grid
             templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
             maxW="6xl"
@@ -52,7 +63,26 @@ const PostPageContent = (props: PostPageProps) => {
               <CategoryPostsCard data={categories} />
             </GridItem>
           </Grid>
-          <Box>{recentPosts.length > 0 && <Posts posts={recentPosts} />}</Box>
+
+          <Stack spacing={16} maxW="8xl" mx="auto">
+            <Heading textStyle={['h2', 'gradient']}>Recent posts</Heading>
+            <Box>{recentPosts.length > 0 && <Posts posts={recentPosts} />}</Box>
+            <Link
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              gap={2}
+              w="fit-content"
+              mt={{ base: 16 }}
+              role="group"
+              href="/posts"
+            >
+              <Text textStyle="link" variant="upperWide" color="black">
+                View all posts
+              </Text>
+              <Icon as={BsArrowRight} h={5} w={5} />
+            </Link>
+          </Stack>
         </VStack>
       </Box>
     </PageLayout>
