@@ -18,9 +18,10 @@ import { RiFlashlightFill } from '@react-icons/all-files/ri/RiFlashlightFill';
 
 const navLinks = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
   { name: 'Work', path: '/work' },
   { name: 'Pricing', path: '/pricing' },
+  { name: 'Blog', path: '/blog' },
+  { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
 ];
 
