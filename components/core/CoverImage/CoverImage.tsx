@@ -13,10 +13,11 @@ const CoverImage = (props: CoverImageProps) => {
   const image = source?.asset?._ref ? (
     <Box>
       <Image
-        width={2000}
-        height={1000}
+        width={1920}
+        height="auto"
         alt={`Cover Image for ${title}`}
         src={urlForImage(source).height(1000).width(2000).url()}
+        objectFit="cover"
       />
     </Box>
   ) : (

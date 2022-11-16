@@ -14,27 +14,31 @@ import { PostProps } from '../../../types';
 import { urlForImage } from '../../../lib/sanity';
 import { Button } from '../Button';
 
-const Card = (props: PostProps) => {
+const FeaturedCard = (props: PostProps) => {
   const { slug, title, excerpt, coverImage, isHero, category, date, author } =
     props || {};
   return (
-    <VStack spacing={0} w="full" bg="white" shadow="md">
-      <Box
-        as={ChakraLink}
-        href={`/posts/post/${slug}`}
-        w="full"
-        // maxH={isHero ? 'xl' : 'lg'}
-        overflow="hidden"
-        aria-label={`View the post titled "${title}"`}
-      >
+    <VStack
+      position="relative"
+      spacing={0}
+      bg="white"
+      shadow="md"
+      // maxW="4xl"
+      w="full"
+    >
+      <Box w="full" maxH="lg" overflow="hidden">
+        <Box
+          position="absolute"
+          w="full"
+          h="full"
+          bg="blackAlpha.700"
+          zIndex={1}
+        />
         <Image
-          src={
-            isHero
-              ? urlForImage(coverImage).width(1920).url()
-              : urlForImage(coverImage).width(992).url()
-          }
+          filter="saturate(0.5)"
+          src={urlForImage(coverImage).width(1920).url()}
           width={1920}
-          height={isHero ? { base: 'xs', md: '3xl' } : 'xs'}
+          height="lg"
           alt=""
           objectFit="cover"
           transition="250ms ease-in-out"
@@ -42,76 +46,92 @@ const Card = (props: PostProps) => {
         />
       </Box>
 
-      <Stack
-        p={8}
-        spacing={4}
-        w="full"
-        alignItems={isHero ? 'center' : 'flex-start'}
-        flex={1}
-        justifyContent="space-between"
+      <Flex
+        position="absolute"
+        zIndex={2}
+        h="full"
+        justifyContent="center"
+        alignItems={{ base: 'center', lg: 'flex-end' }}
+        pb={{ lg: 8 }}
       >
-        <Stack>
+        <Stack
+          maxW="2xl"
+          p={8}
+          spacing={4}
+          w="full"
+          flex={1}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Text
             as={ChakraLink}
             href={`/category/${category.slug.current}/1`}
-            color="brand.600"
+            color="white"
             borderBottom="1px solid"
-            borderColor="brand.500"
+            borderColor="white"
             textTransform="uppercase"
             fontSize="sm"
+            fontWeight="semibold"
             w="fit-content"
             letterSpacing={1}
             textStyle="link"
+            _hover={{ color: 'brand.200' }}
           >
             {category.label}
           </Text>
           <chakra.h3
             as={ChakraLink}
             href={`/posts/post/${slug}`}
+            color="white"
             textStyle="link"
+            textAlign="center"
             fontSize={isHero ? '4xl' : '2xl'}
-            fontWeight="semibold"
+            fontWeight="black"
             letterSpacing="wider"
           >
             {title}
           </chakra.h3>
-          <Text display="flex" gap={3} fontSize="sm" color="blackAlpha.500">
+          <Text
+            display="flex"
+            gap={3}
+            fontSize="sm"
+            color="white"
+            fontWeight="normal"
+          >
             <chakra.span
               // as={ChakraLink}
               textStyle="link"
-              _hover={{ color: 'black' }}
+              _hover={{ color: 'brand.200' }}
             >
               {format(new Date(date), 'MMMM do, yyyy')}
             </chakra.span>
-            <chakra.span color="black">|</chakra.span>
+            <chakra.span>|</chakra.span>
             <chakra.span>
               by{' '}
               <chakra.span
                 as={ChakraLink}
                 href={`/author/${author.slug.current}`}
                 textStyle="link"
-                _hover={{ color: 'black' }}
+                _hover={{ color: 'brand.200' }}
               >
                 {author.name}
               </chakra.span>
             </chakra.span>
           </Text>
-          <Text color="blackAlpha.700" letterSpacing={0.5}>
-            {excerpt}
-          </Text>
+
+          {/* <Flex justifyContent="center" w="full" pt={8}>
+            <Button
+              href={`/posts/post/${slug}`}
+              variant="light"
+              ariaLabel={`View the post titled "${title}"`}
+            >
+              View post
+            </Button>
+          </Flex> */}
         </Stack>
-        <Flex justifyContent={isHero ? 'center' : 'flex-start'} w="full" pt={8}>
-          <Button
-            href={`/posts/post/${slug}`}
-            variant="light"
-            ariaLabel={`View the post titled "${title}"`}
-          >
-            View post
-          </Button>
-        </Flex>
-      </Stack>
+      </Flex>
     </VStack>
   );
 };
 
-export default Card;
+export default FeaturedCard;

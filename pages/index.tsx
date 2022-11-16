@@ -1,15 +1,7 @@
-import {
-  Box,
-  Heading,
-  Icon,
-  Link,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { Heading, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react';
 import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight';
 import { NextSeo } from 'next-seo';
-import { Card } from '../components/core';
+import { Carousel, FeaturedCard } from '../components/core';
 import { Posts } from '../components/posts';
 import { PageLayout } from '../layouts';
 import { homePageQuery } from '../lib/groq';
@@ -52,21 +44,30 @@ const HomePage = (props: HomePageProps) => {
         <VStack
           spacing={28}
           w="full"
-          maxW="8xl"
+          maxW="100vw"
           mx="auto"
           justifyContent="center"
-          px={4}
         >
-          {featuredPost && (
-            <Box>
-              <Card
-                {...featuredPost}
-                isHero
-                coverImage={featuredPost.coverImage}
-              />
-            </Box>
-          )}
-          <Stack spacing={16}>
+          <Carousel>
+            <FeaturedCard
+              {...featuredPost}
+              coverImage={featuredPost.coverImage}
+            />
+            <FeaturedCard
+              {...featuredPost}
+              coverImage={featuredPost.coverImage}
+            />
+            <FeaturedCard
+              {...featuredPost}
+              coverImage={featuredPost.coverImage}
+            />
+            <FeaturedCard
+              {...featuredPost}
+              coverImage={featuredPost.coverImage}
+            />
+          </Carousel>
+
+          <Stack spacing={16} maxW="8xl" mx="auto">
             <Heading textStyle={['h2', 'gradient']}>Recent posts</Heading>
             {recentPosts.length > 0 && <Posts posts={recentPosts} />}
             <Link
