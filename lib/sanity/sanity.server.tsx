@@ -4,6 +4,7 @@
  * code that is not used on the client side.
  */
 import { createClient } from 'next-sanity'
+import { PostProps } from '../../types'
 
 import { sanityConfig } from './config'
 
@@ -20,7 +21,7 @@ export const getClient = (preview) =>
       })
     : createClient(sanityConfig)
 
-export function overlayDrafts(docs) {
+export function overlayDrafts(docs): PostProps[] {
   const documents = docs || []
   const overlayed = documents.reduce((map, doc) => {
     if (!doc._id) {

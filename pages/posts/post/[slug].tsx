@@ -8,9 +8,12 @@ import {
   postsByAuthorQuery,
   postSlugsQuery,
 } from '../../../lib/groq'
-import { urlForImage } from '../../../lib/sanity'
-import { getClient, overlayDrafts } from '../../../lib/sanity.server'
-import { PostPageProps } from '../../../types'
+import { getClient, overlayDrafts, urlForImage } from '../../../lib/sanity'
+import {
+  PostPageProps,
+  PostPageStaticPathsProps,
+  PostPageStaticPropsResponse,
+} from '../../../types'
 
 const PostPage = (props: PostPageProps) => {
   const router = useRouter()
@@ -89,7 +92,7 @@ const PostPage = (props: PostPageProps) => {
   )
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths = async (): Promise<PostPageStaticPathsProps> => {
   const paths = await getClient(false).fetch(postSlugsQuery)
   return {
     paths: paths.map((slug: string) => ({ params: { slug } })),
@@ -97,7 +100,10 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params, preview = false }) => {
+export const getStaticProps = async ({
+  params,
+  preview = false,
+}): Promise<PostPageStaticPropsResponse> => {
   // Fetch requested post and the three most recent posts, excluding this one.
   const { blogSettings, post, categories, recentPosts } = await getClient(
     preview

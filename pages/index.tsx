@@ -5,9 +5,8 @@ import { Card } from '../components/core'
 import Layout from '../components/layout'
 import { Posts } from '../components/posts'
 import { homePageQuery } from '../lib/groq'
-import { urlForImage } from '../lib/sanity'
-import { getClient } from '../lib/sanity.server'
-import { HomePageProps } from '../types'
+import { getClient, urlForImage } from '../lib/sanity'
+import { HomePageProps, HomePageStaticPropsResponse } from '../types'
 
 const HomePage = (props: HomePageProps) => {
   const { preview, blogSettings, featuredPost, recentPosts } = props
@@ -84,7 +83,9 @@ const HomePage = (props: HomePageProps) => {
   )
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getStaticProps({
+  preview = false,
+}): Promise<HomePageStaticPropsResponse> {
   /* check if the project id has been defined by fetching the vercel envs */
   if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
     // Get the home page data.
@@ -99,12 +100,6 @@ export async function getStaticProps({ preview = false }) {
       // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
       revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
     }
-  }
-
-  /* when the client isn't set up */
-  return {
-    props: {},
-    revalidate: undefined,
   }
 }
 

@@ -41,3 +41,8 @@ export interface SocialsProps {
   instagram: string
   youtube: string
 }
+
+export interface PaginationProps {
+  currentPage: number
+  totalPages: number
+}

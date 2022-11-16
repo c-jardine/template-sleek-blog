@@ -1,9 +1,8 @@
-import { DefaultSeo } from 'next-seo'
-import '../styles/globals.css'
 import { ChakraProvider } from '@chakra-ui/react'
+import { DefaultSeo } from 'next-seo'
 import { Navbar } from '../components/core/Navbar'
+import '../styles/globals.css'
 import theme from '../styles/theme/theme'
-import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps }) {
   return (

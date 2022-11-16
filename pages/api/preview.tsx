@@ -1,5 +1,5 @@
 import { postBySlugQuery } from '../../lib/groq'
-import { getClient } from '../../lib/sanity.server'
+import { getClient } from '../../lib/sanity'
 
 function redirectToPreview(res, Location) {
   // Enable Preview Mode by setting the cookies

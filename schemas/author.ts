@@ -1,6 +1,5 @@
 import { UserIcon } from '@sanity/icons'
 import { defineType } from 'sanity'
-
 import socialsType from './socials'
 
 export default defineType({

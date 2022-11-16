@@ -13,23 +13,18 @@ import {
   authorSlugsQuery,
   countPostsByAuthor,
 } from '../../../lib/groq'
-import { urlForImage } from '../../../lib/sanity'
-import { getClient } from '../../../lib/sanity.server'
-import { AuthorPageProps } from '../../../types'
+import { getClient, urlForImage } from '../../../lib/sanity'
+import {
+  AuthorPageProps,
+  AuthorPageStaticPathsResponse,
+  AuthorPageStaticPropsResponse,
+} from '../../../types'
 
 const RESULTS_PER_PAGE = 4
 
 const AuthorPage = (props: AuthorPageProps) => {
-  const {
-    preview,
-    slug,
-    blogSettings,
-    author,
-    posts,
-    categories,
-    currentPage,
-    totalPages,
-  } = props
+  const { preview, slug, blogSettings, author, posts, categories, pagination } =
+    props
 
   const [firstName, lastName] = author?.name.split(' ')
 
@@ -80,11 +75,7 @@ const AuthorPage = (props: AuthorPageProps) => {
               <VStack spacing={28}>
                 <Stack spacing={8}>
                   <AuthorPosts preview={preview} posts={posts} />
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    slug={`/author/${slug}`}
-                  />
+                  <Pagination {...pagination} slug={`/author/${slug}`} />
                 </Stack>
               </VStack>
             </GridItem>
@@ -109,38 +100,42 @@ const AuthorPage = (props: AuthorPageProps) => {
  * and calculates the total number of pages of posts that author will have,
  * based on the results show per page.
  */
-export const getStaticPaths = async () => {
-  const slugs = await getClient(false).fetch(authorSlugsQuery)
-  const pathsData = await Promise.all(
-    slugs.map(async (slug: string) => {
-      // Get the total number of posts by the author and divide by the
-      // number shown per page to get the total number of pages.
-      const totalPages =
-        (await getClient(false).fetch(countPostsByAuthor, {
-          slug,
-        })) / RESULTS_PER_PAGE
-      const totalPagesArray = [...Array(Math.ceil(totalPages)).keys()]
-      const params = totalPagesArray.map((page) => {
-        // Set page to page + 1 to make them 1-indexed.
-        return { params: { slug, page: (page + 1).toString() } }
+export const getStaticPaths =
+  async (): Promise<AuthorPageStaticPathsResponse> => {
+    const slugs = await getClient(false).fetch(authorSlugsQuery)
+    const pathsData = await Promise.all(
+      slugs.map(async (slug: string) => {
+        // Get the total number of posts by the author and divide by the
+        // number shown per page to get the total number of pages.
+        const totalPages =
+          (await getClient(false).fetch(countPostsByAuthor, {
+            slug,
+          })) / RESULTS_PER_PAGE
+        const totalPagesArray = [...Array(Math.ceil(totalPages)).keys()]
+        const params = totalPagesArray.map((page) => {
+          // Set page to page + 1 to make them 1-indexed.
+          return { params: { slug, page: (page + 1).toString() } }
+        })
+        return params
       })
-      return params
-    })
-  )
+    )
 
-  // Flatten results as necessary to match required paths typing.
-  const paths = [].concat.apply([], pathsData)
+    // Flatten results as necessary to match required paths typing.
+    const paths = [].concat.apply([], pathsData)
 
-  return {
-    paths,
-    fallback: false,
+    return {
+      paths,
+      fallback: false,
+    }
   }
-}
 
 /**
  * Retrieve the necessary data.
  */
-export const getStaticProps = async ({ params, preview = false }) => {
+export const getStaticProps = async ({
+  params,
+  preview = false,
+}): Promise<AuthorPageStaticPropsResponse> => {
   const start = (params.page - 1) * RESULTS_PER_PAGE
   const end = start + RESULTS_PER_PAGE
 
@@ -161,8 +156,10 @@ export const getStaticProps = async ({ params, preview = false }) => {
       author,
       posts,
       categories,
-      currentPage: params.page,
-      totalPages,
+      pagination: {
+        currentPage: params.page,
+        totalPages,
+      },
     },
     // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
     revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
