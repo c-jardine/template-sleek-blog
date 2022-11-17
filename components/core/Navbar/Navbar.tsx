@@ -17,12 +17,12 @@ import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 import { RiFlashlightFill } from '@react-icons/all-files/ri/RiFlashlightFill';
 
 const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'Work', path: '/work' },
-  { name: 'Pricing', path: '/pricing' },
-  { name: 'Blog', path: '/blog' },
-  { name: 'About', path: '/about' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Home', path: 'https://sleek.keplux.com/' },
+  { name: 'Work', path: 'https://sleek.keplux.com/work' },
+  { name: 'Pricing', path: 'https://sleek.keplux.com/pricing' },
+  { name: 'Blog', path: 'https://blog.keplux.com' },
+  { name: 'About', path: 'https://sleek.keplux.com/about' },
+  { name: 'Contact', path: 'https://sleek.keplux.com/contact' },
 ];
 
 const Navbar = () => {
