@@ -1,11 +1,11 @@
-import { UserIcon } from '@sanity/icons';
+import { FaUser } from '@react-icons/all-files/fa/FaUser';
 import { defineType } from 'sanity';
 import socialsType from './socials';
 
 export default defineType({
   name: 'author',
   title: 'Author',
-  icon: UserIcon,
+  icon: FaUser,
   type: 'document',
   fields: [
     {

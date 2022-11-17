@@ -1,4 +1,4 @@
-import { TagIcon } from '@sanity/icons';
+import { FaTag } from '@react-icons/all-files/fa/FaTag';
 import { defineType } from 'sanity';
 
 /**
@@ -16,7 +16,7 @@ import { defineType } from 'sanity';
 export default defineType({
   name: 'category',
   title: 'Category',
-  icon: TagIcon,
+  icon: FaTag,
   type: 'document',
   fields: [
     {

@@ -1,21 +1,20 @@
 /**
  * This config is used to set up Sanity Studio that's mounted on the `/pages/studio/[[...index]].tsx` route
  */
-
+import { FaSlidersH } from '@react-icons/all-files/fa/FaSlidersH';
+import { colorInput } from '@sanity/color-input';
 import { visionTool } from '@sanity/vision';
 import { defineConfig, Slug } from 'sanity';
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash';
 import { deskTool } from 'sanity/desk';
-
 import { PostsPreview } from './components/posts/PostsPreview';
 import authorType from './schemas/author';
+import brandType from './schemas/brand';
 import categoryType from './schemas/category';
+import homePageType from './schemas/homePage';
 import postType from './schemas/post';
 import settingsType from './schemas/settings';
 import socialsType from './schemas/socials';
-import homePageType from './schemas/homePage';
-import { BiWrench } from '@react-icons/all-files/bi/BiWrench';
-import { MdHome } from '@react-icons/all-files/md/MdHome';
 
 // @TODO: update next-sanity/studio to automatically set this when needed
 const basePath = '/studio';
@@ -34,9 +33,11 @@ const config = defineConfig({
       socialsType,
       categoryType,
       homePageType,
+      brandType,
     ],
   },
   plugins: [
+    colorInput(),
     deskTool({
       structure: (S) => {
         // The `Settings` root list item
@@ -50,17 +51,26 @@ const config = defineConfig({
                 .items([
                   S.listItem()
                     .title('General')
-                    .icon(BiWrench)
+                    .icon(FaSlidersH)
                     .child(
                       S.editor()
                         .id(settingsType.name)
                         .schemaType(settingsType.name)
                         .documentId(settingsType.name)
                     ),
+                  S.listItem()
+                    .title('Brand')
+                    .icon(brandType.icon)
+                    .child(
+                      S.document()
+                        .id(brandType.name)
+                        .schemaType(brandType.name)
+                        .documentId(brandType.name)
+                    ),
                   S.divider(),
                   S.listItem()
                     .title('Home Page')
-                    .icon(MdHome)
+                    .icon(homePageType.icon)
                     .child(
                       S.document()
                         .id(homePageType.name)
@@ -72,7 +82,11 @@ const config = defineConfig({
 
         // The default root list items (except custom ones)
         const defaultListItems = S.documentTypeListItems().filter(
-          (listItem) => listItem.getId() !== settingsType.name
+          (listItem) =>
+            listItem.getId() !== settingsType.name &&
+            listItem.getId() !== homePageType.name &&
+            listItem.getId() !== brandType.name &&
+            listItem.getId() !== socialsType.name
         );
 
         return S.list()
@@ -132,7 +146,11 @@ const config = defineConfig({
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
         return prev.filter(
-          (templateItem) => templateItem.templateId !== settingsType.name
+          (templateItem) =>
+            templateItem.templateId !== settingsType.name &&
+            templateItem.templateId !== homePageType.name &&
+            templateItem.templateId !== brandType.name&&
+            templateItem.templateId !== socialsType.name
         );
       }
 

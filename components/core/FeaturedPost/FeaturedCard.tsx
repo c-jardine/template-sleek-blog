@@ -12,11 +12,15 @@ import { format } from 'date-fns';
 import { PostProps } from '../../../types';
 
 import { urlForImage } from '../../../lib/sanity';
-import { Button } from '../Button';
+import React from 'react';
 
 const FeaturedCard = (props: PostProps) => {
-  const { slug, title, excerpt, coverImage, isHero, category, date, author } =
+  const { slug, title, coverImage, isHero, category, date, author } =
     props || {};
+
+  React.useEffect(() => {
+    console.log(coverImage);
+  }, []);
   return (
     <VStack
       position="relative"
@@ -81,7 +85,7 @@ const FeaturedCard = (props: PostProps) => {
           </Text>
           <chakra.h3
             as={ChakraLink}
-            href={`/posts/post/${slug}`}
+            href={`/posts/post/${slug.current}`}
             color="white"
             textStyle="link"
             textAlign="center"

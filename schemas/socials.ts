@@ -1,10 +1,10 @@
-import { LinkIcon } from '@sanity/icons';
+import { FaLink } from '@react-icons/all-files/fa/FaLink';
 import { defineType } from 'sanity';
 
 export default defineType({
   name: 'socials',
   title: 'Social Media',
-  icon: LinkIcon,
+  icon: FaLink,
   type: 'document',
   fields: [
     {

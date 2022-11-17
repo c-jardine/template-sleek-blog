@@ -5,35 +5,35 @@ import { Carousel, FeaturedCard } from '../components/core';
 import { Posts } from '../components/posts';
 import { PageLayout } from '../layouts';
 import { homePageQuery } from '../lib/groq';
-import { getClient, urlForImage } from '../lib/sanity';
+import { getClient } from '../lib/sanity';
 import { HomePageProps, HomePageStaticPropsResponse } from '../types';
 
 const HomePage = (props: HomePageProps) => {
-  const { preview, blogSettings, featuredPost, recentPosts } = props;
+  const { preview, blogSettings, featuredPosts, recentPosts } = props;
 
   return (
     <>
       <NextSeo
         title="Home"
-        description={featuredPost.excerpt}
+        // description={featuredPost.excerpt}
         canonical={blogSettings.url}
         openGraph={{
           url: blogSettings.url,
           title: `Home | ${blogSettings.title}`,
-          description: featuredPost.excerpt,
-          images: [
-            {
-              url: urlForImage(featuredPost.coverImage)
-                .width(1200)
-                .height(627)
-                .fit('crop')
-                .url(),
-              width: 900,
-              height: 800,
-              alt: 'Share image',
-              type: 'image/jpeg',
-            },
-          ],
+          // description: featuredPost.excerpt,
+          // images: [
+          //   {
+          //     url: urlForImage(featuredPost.coverImage)
+          //       .width(1200)
+          //       .height(627)
+          //       .fit('crop')
+          //       .url(),
+          //     width: 900,
+          //     height: 800,
+          //     alt: 'Share image',
+          //     type: 'image/jpeg',
+          //   },
+          // ],
           siteName: blogSettings.title,
         }}
         twitter={{
@@ -49,22 +49,13 @@ const HomePage = (props: HomePageProps) => {
           justifyContent="center"
         >
           <Carousel>
-            <FeaturedCard
-              {...featuredPost}
-              coverImage={featuredPost.coverImage}
-            />
-            <FeaturedCard
-              {...featuredPost}
-              coverImage={featuredPost.coverImage}
-            />
-            <FeaturedCard
-              {...featuredPost}
-              coverImage={featuredPost.coverImage}
-            />
-            <FeaturedCard
-              {...featuredPost}
-              coverImage={featuredPost.coverImage}
-            />
+            {featuredPosts.posts.map((post, index) => (
+              <FeaturedCard
+                key={index}
+                {...post}
+                coverImage={post.coverImage}
+              />
+            ))}
           </Carousel>
 
           <Stack spacing={16} maxW="8xl" mx="auto">

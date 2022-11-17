@@ -20,6 +20,7 @@
     "@emotion/styled": "^11.10.5",
     "@portabletext/react": "^2.0.0",
     "@react-icons/all-files": "^4.1.0",
+    "@sanity/color-input": "^3.0.0-v3-studio.12",
     "@sanity/image-url": "^1.0.1",
     "@sanity/vision": "3.0.0-rc.2",
     "@sanity/webhook": "^2.0.0",

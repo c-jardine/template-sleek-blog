@@ -3,7 +3,7 @@ import { PostProps } from '../../primitives';
 import { PostPageProps } from '../PostPageProps';
 
 export interface HomePageProps extends PageProps {
-  featuredPost: PostProps;
+  featuredPosts: PostProps[];
   recentPosts: PostProps[];
 }
 

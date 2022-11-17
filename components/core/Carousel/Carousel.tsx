@@ -14,7 +14,7 @@ const Carousel = (props) => {
     <Box w="full">
       <Swiper
         loop
-        initialSlide={1}
+        initialSlide={0}
         slidesPerView="auto"
         spaceBetween={0}
         breakpoints={{

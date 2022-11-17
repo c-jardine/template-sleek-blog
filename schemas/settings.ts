@@ -1,11 +1,11 @@
-import { CogIcon } from '@sanity/icons';
+import { FaCog } from '@react-icons/all-files/fa/FaCog';
 import { defineType } from 'sanity';
 
 export default defineType({
   name: 'settings',
   title: 'Settings',
   type: 'document',
-  icon: CogIcon,
+  icon: FaCog,
   fields: [
     {
       name: 'title',

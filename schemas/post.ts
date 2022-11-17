@@ -1,4 +1,4 @@
-import { BookIcon } from '@sanity/icons';
+import { FaFileAlt } from '@react-icons/all-files/fa/FaFileAlt';
 import { defineType } from 'sanity';
 
 import authorType from './author';
@@ -19,7 +19,7 @@ import categoryType from './category';
 export default defineType({
   name: 'post',
   title: 'Post',
-  icon: BookIcon,
+  icon: FaFileAlt,
   type: 'document',
   fields: [
     {
