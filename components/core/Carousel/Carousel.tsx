@@ -11,7 +11,7 @@ import { Pagination } from 'swiper';
 
 const Carousel = (props) => {
   return (
-    <Box w="full">
+    <Box w="full" maxW="2048px" mx="auto">
       <Swiper
         loop
         initialSlide={0}

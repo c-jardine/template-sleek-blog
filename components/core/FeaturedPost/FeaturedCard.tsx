@@ -24,7 +24,7 @@ const FeaturedCard = (props: PostProps) => {
       spacing={0}
       bg="white"
       shadow="md"
-      // maxW="4xl"
+      maxW="8xl"
       w="full"
     >
       <Box w="full" maxH="lg" overflow="hidden">
