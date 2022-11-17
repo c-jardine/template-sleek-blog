@@ -18,7 +18,7 @@ const Card = (props: PostProps) => {
   const { slug, title, excerpt, coverImage, isHero, category, date, author } =
     props || {};
   return (
-    <VStack spacing={0} w="full" bg="white" shadow="md">
+    <VStack spacing={0} w="full" bg="cardBackground" shadow="md">
       <Box
         as={ChakraLink}
         href={`/posts/post/${slug}`}
@@ -72,31 +72,32 @@ const Card = (props: PostProps) => {
             fontSize={isHero ? '4xl' : '2xl'}
             fontWeight="semibold"
             letterSpacing="wider"
+            color="headerText"
           >
             {title}
           </chakra.h3>
-          <Text display="flex" gap={3} fontSize="sm" color="blackAlpha.500">
+          <Text display="flex" gap={3} fontSize="sm" color="subtleText">
             <chakra.span
               // as={ChakraLink}
               textStyle="link"
-              _hover={{ color: 'black' }}
+              _hover={{ color: 'headerText' }}
             >
               {format(new Date(date), 'MMMM do, yyyy')}
             </chakra.span>
-            <chakra.span color="black">|</chakra.span>
+            <chakra.span color="bodyText">|</chakra.span>
             <chakra.span>
               by{' '}
               <chakra.span
                 as={ChakraLink}
                 href={`/author/${author.slug.current}`}
                 textStyle="link"
-                _hover={{ color: 'black' }}
+                _hover={{ color: 'headerText' }}
               >
                 {author.name}
               </chakra.span>
             </chakra.span>
           </Text>
-          <Text color="blackAlpha.700" letterSpacing={0.5}>
+          <Text color="bodyText" letterSpacing={0.5}>
             {excerpt}
           </Text>
         </Stack>

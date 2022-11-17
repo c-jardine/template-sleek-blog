@@ -1,4 +1,4 @@
-import { Heading, Stack, VStack } from '@chakra-ui/react';
+import { Heading, Stack, VStack, chakra, Text } from '@chakra-ui/react';
 import { PageLayout } from '../../../layouts';
 import { PostsPageProps } from '../../../types';
 import { Pagination } from '../../core';
@@ -14,10 +14,12 @@ const PostsPageContent = (props: PostsPageProps) => {
         maxW="8xl"
         mx="auto"
         justifyContent="center"
-        px={4}
+        px={{ base: 4, '2xl': 0 }}
       >
-        <Stack spacing={16}>
-          <Heading textStyle={['h2', 'gradient']}>All posts</Heading>
+        <Stack spacing={10}>
+          <chakra.h1 textStyle="h1">
+            <chakra.span textStyle="gradient">All posts</chakra.span>
+          </chakra.h1>
           {posts.length > 0 && <Posts posts={posts} />}
         </Stack>
         <Pagination {...pagination} slug={`/posts`} />

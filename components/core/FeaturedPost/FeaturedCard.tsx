@@ -18,9 +18,6 @@ const FeaturedCard = (props: PostProps) => {
   const { slug, title, coverImage, isHero, category, date, author } =
     props || {};
 
-  React.useEffect(() => {
-    console.log(coverImage);
-  }, []);
   return (
     <VStack
       position="relative"

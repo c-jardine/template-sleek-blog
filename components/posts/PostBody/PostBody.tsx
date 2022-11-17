@@ -6,9 +6,9 @@ import style from './PostBody.module.css';
 const PostBody = ({ content }) => {
   return (
     <Box
-      px={8}
+      px={{ base: 4, md: 8 }}
       fontSize="md"
-      color="blackAlpha.600"
+      color="bodyText"
       className={style.portableText}
     >
       <PortableText value={content} components={PortableTextComponents} />

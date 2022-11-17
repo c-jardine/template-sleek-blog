@@ -5,6 +5,7 @@ export * from './Carousel';
 export * from './CoverImage';
 export * from './Date';
 export * from './FeaturedPost';
+export * from './Footer';
 export * from './Meta';
 export * from './Navbar';
 export * from './Pagination';

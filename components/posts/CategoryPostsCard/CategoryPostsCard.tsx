@@ -1,16 +1,23 @@
-import { chakra, Link as ChakraLink, Stack, Text } from '@chakra-ui/react';
+import {
+  chakra,
+  Flex,
+  Icon,
+  Link as ChakraLink,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight';
 import { SectionSeparator } from '../../core';
 import { CategoryPostsCardProps } from './CategoryPostsCard.types';
 
 const CategoryPostsCard = (props: { data: CategoryPostsCardProps[] }) => {
   return (
-    <Stack bg="white" w="full" shadow="md" p={8} spacing={8}>
+    <Stack bg="cardBackground" w="full" shadow="md" p={8} spacing={8}>
       <Text
         textTransform="uppercase"
         textAlign="center"
         fontWeight="bold"
-        color="black"
+        color="headerText"
         fontSize="sm"
         lineHeight={0}
       >
@@ -19,28 +26,27 @@ const CategoryPostsCard = (props: { data: CategoryPostsCardProps[] }) => {
       <SectionSeparator />
       <Stack divider={<SectionSeparator />} gap={2}>
         {props.data.map((category) => (
-          <Text
+          <Flex
             key={category.label}
-            display="flex"
             alignItems="center"
             gap={2}
             fontSize="sm"
             letterSpacing={1}
+            lineHeight={0}
+            py={3}
           >
-            <chakra.span color="blackAlpha.400">
-              <FaChevronRight size={10} />
-            </chakra.span>
+            <Icon as={FaChevronRight} w={3} h={3} color="subtleText" />
             <chakra.span
               as={ChakraLink}
               href={`/category/${category.slug.current}`}
               textStyle="link"
               fontWeight="semibold"
-              color="chalkboard"
+              color="headerText"
             >
               {category.label}
             </chakra.span>
-            ({category.posts})
-          </Text>
+            <chakra.span color="bodyText">({category.posts})</chakra.span>
+          </Flex>
         ))}
       </Stack>
     </Stack>

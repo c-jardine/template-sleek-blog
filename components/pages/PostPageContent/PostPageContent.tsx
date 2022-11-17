@@ -12,6 +12,7 @@ import {
 import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight';
 import { PageLayout } from '../../../layouts';
 import { PostPageProps } from '../../../types';
+import { chakra } from '@chakra-ui/react';
 import {
   AuthorCard,
   AuthorSocials,
@@ -28,7 +29,7 @@ const PostPageContent = (props: PostPageProps) => {
   return (
     <PageLayout preview={preview}>
       <Box>
-        <VStack spacing={28} px={4}>
+        <VStack spacing={28} px={{ base: 4, '2xl': 0 }}>
           <Grid
             templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
             maxW="6xl"
@@ -40,7 +41,7 @@ const PostPageContent = (props: PostPageProps) => {
               colSpan={{ base: 1, lg: 2 }}
               maxW="4xl"
               mx="auto"
-              bg="white"
+              bg="cardBackground"
               py={16}
               shadow="md"
             >
@@ -64,8 +65,10 @@ const PostPageContent = (props: PostPageProps) => {
             </GridItem>
           </Grid>
 
-          <Stack spacing={16} maxW="8xl" mx="auto">
-            <Heading textStyle={['h2', 'gradient']}>Recent posts</Heading>
+          <Stack spacing={10} maxW="8xl" mx="auto">
+            <chakra.h2 textStyle="h1">
+              <chakra.span textStyle="gradient">Recent posts</chakra.span>
+            </chakra.h2>
             <Box>{recentPosts.length > 0 && <Posts posts={recentPosts} />}</Box>
             <Link
               aria-label="View all recent posts"
@@ -78,10 +81,10 @@ const PostPageContent = (props: PostPageProps) => {
               role="group"
               href="/posts"
             >
-              <Text textStyle="link" variant="upperWide" color="black">
+              <Text textStyle="link" variant="upperWide" color="headerText">
                 View all posts
               </Text>
-              <Icon as={BsArrowRight} h={5} w={5} />
+              <Icon as={BsArrowRight} h={5} w={5} color="headerText" />
             </Link>
           </Stack>
         </VStack>

@@ -26,13 +26,23 @@ a:hover {
 .swiper-pagination-bullet {
   background-color: white !important;
   height: 0.5rem !important;
-  width: 2rem !important;
+  width: 3rem !important;
   border-radius: 0 !important;
+  transition: 200ms ease-in-out;
+}
+
+.swiper-pagination-bullet:hover {
+  background-color: var(--chakra-colors-brand-400) !important;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #00a3c4 !important;
+  background-color: var(--chakra-colors-brand-500) !important;
   height: 0.5rem !important;
-  width: 2rem !important;
+  width: 3rem !important;
   border-radius: 0 !important;
+  transition: 200ms ease-in-out;
+}
+
+.swiper-pagination-bullet-active:hover {
+  background-color: var(--chakra-colors-brand-400) !important;
 }

@@ -1,4 +1,4 @@
-import { Box, Flex, Link, SimpleGrid } from '@chakra-ui/react';
+import { Box, Flex, Icon, Link, SimpleGrid } from '@chakra-ui/react';
 import { FaChevronLeft } from '@react-icons/all-files/fa/FaChevronLeft';
 import { FaChevronRight } from '@react-icons/all-files/fa/FaChevronRight';
 import { PaginationButtonProps } from './Pagination.types';
@@ -15,7 +15,7 @@ const Pagination = (props) => {
       justify="center"
       alignItems="center"
       mt={{ base: 3, md: 0 }}
-      bg="white"
+      bg="cardBackground"
       shadow="md"
       py={4}
       px={{ base: 4, md: 0 }}
@@ -25,7 +25,7 @@ const Pagination = (props) => {
         href={`${props.slug}/${currentPage - 1}`}
         isDisabled={currentPage <= 1}
       >
-        <FaChevronLeft size={12} />
+        <Icon as={FaChevronLeft} size={12} color="headerText" />
       </StyledPageButton>
       <SimpleGrid columns={5} gap={2}>
         <PageButton
@@ -64,7 +64,7 @@ const Pagination = (props) => {
         href={`${props.slug}/${currentPage + 1}`}
         isDisabled={currentPage >= totalPages}
       >
-        <FaChevronRight size={12} />
+        <Icon as={FaChevronRight} size={12} color="headerText" />
       </StyledPageButton>
     </Flex>
   );
@@ -121,6 +121,7 @@ const StyledPageButton = ({
       transition="200ms ease-in-out"
       _hover={!isDisabled && { bg: !isActive && { lg: 'blackAlpha.200' } }}
       cursor={isDisabled ? 'not-allowed' : 'pointer'}
+      color="bodyText"
       {...(isActive && activeStyle)}
       {...props}
     >

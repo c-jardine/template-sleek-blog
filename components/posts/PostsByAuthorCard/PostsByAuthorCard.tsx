@@ -13,12 +13,12 @@ import { SectionSeparator } from '../../core';
 
 const PostsByAuthorCard = (props: { posts: PostProps[]; author: string }) => {
   return (
-    <Stack bg="white" w="full" shadow="md" p={8} spacing={8}>
+    <Stack bg="cardBackground" w="full" shadow="md" p={8} spacing={8}>
       <Text
         textTransform="uppercase"
         textAlign="center"
         fontWeight="bold"
-        color="black"
+        color="headerText"
         fontSize="sm"
         lineHeight={0}
       >
@@ -48,10 +48,11 @@ const PostsByAuthorCard = (props: { posts: PostProps[]; author: string }) => {
               fontWeight="semibold"
               letterSpacing="wide"
               fontSize="md"
+              color="headerText"
             >
               {post.title}
             </chakra.h3>
-            <Text fontSize="xs">
+            <Text fontSize="xs" color="subtleText">
               {format(new Date(post.date), 'MMMM dd, yyyy')}
             </Text>
           </Box>

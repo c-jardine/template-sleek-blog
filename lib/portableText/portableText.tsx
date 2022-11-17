@@ -33,7 +33,7 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
   block: {
     h2: ({ children }) => (
       <chakra.h2
-        color="chalkboard"
+        color="headerText"
         mt={12}
         mb={4}
         fontSize="4xl"
@@ -54,7 +54,7 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
             as={FaQuoteLeft}
             w={8}
             h={8}
-            bg="white"
+            bg="cardBackground"
             px={1}
             color="brand.500"
             position="absolute"
@@ -66,7 +66,7 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
             as={FaQuoteRight}
             w={8}
             h={8}
-            bg="white"
+            bg="cardBackground"
             px={1}
             color="brand.500"
             position="absolute"
@@ -74,8 +74,8 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
             bottom={-4}
             right={4}
           />
-          <VStack spacing={3} p={4} bg="white" pos="relative">
-            <Text variant="details" px={4}>
+          <VStack spacing={3} p={4} bg="cardBackground" pos="relative">
+            <Text variant="details" color="bodyText">
               {children}
             </Text>
           </VStack>
@@ -85,12 +85,12 @@ const PortableTextComponents: Partial<PortableTextReactComponents> = {
   },
   list: {
     bullet: ({ children }) => (
-      <chakra.ul marginLeft={12} my={6}>
+      <chakra.ul marginLeft={8} my={6}>
         {children}
       </chakra.ul>
     ),
     number: ({ children }) => (
-      <chakra.ol marginLeft={12} my={6}>
+      <chakra.ol marginLeft={8} my={6}>
         {children}
       </chakra.ol>
     ),

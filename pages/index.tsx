@@ -1,10 +1,18 @@
-import { Heading, Icon, Link, Stack, Text, VStack } from '@chakra-ui/react';
+import {
+  Heading,
+  Icon,
+  Link,
+  Stack,
+  Text,
+  VStack,
+  chakra,
+} from '@chakra-ui/react';
 import { BsArrowRight } from '@react-icons/all-files/bs/BsArrowRight';
 import { NextSeo } from 'next-seo';
 import { Carousel, FeaturedCard } from '../components/core';
 import { Posts } from '../components/posts';
 import { PageLayout } from '../layouts';
-import { homePageQuery } from '../lib/groq';
+import { brandQuery, homePageQuery } from '../lib/groq';
 import { getClient } from '../lib/sanity';
 import { HomePageProps, HomePageStaticPropsResponse } from '../types';
 
@@ -42,6 +50,7 @@ const HomePage = (props: HomePageProps) => {
       />
       <PageLayout preview={preview}>
         <VStack
+          mt={{ base: -8, lg: -10 }}
           spacing={28}
           w="full"
           maxW="100vw"
@@ -58,8 +67,10 @@ const HomePage = (props: HomePageProps) => {
             ))}
           </Carousel>
 
-          <Stack spacing={16} maxW="8xl" mx="auto">
-            <Heading textStyle={['h2', 'gradient']}>Recent posts</Heading>
+          <Stack spacing={10} maxW="8xl" mx="auto" px={{ base: 4, '2xl': 0 }}>
+            <chakra.h2 textStyle="h1">
+              <chakra.span textStyle="gradient">Recent posts</chakra.span>
+            </chakra.h2>
             {recentPosts.length > 0 && <Posts posts={recentPosts} />}
             <Link
               aria-label="View all blog posts"
@@ -72,10 +83,10 @@ const HomePage = (props: HomePageProps) => {
               role="group"
               href="/posts"
             >
-              <Text textStyle="link" variant="upperWide" color="black">
+              <Text textStyle="link" variant="upperWide" color="headerText">
                 View all posts
               </Text>
-              <Icon as={BsArrowRight} h={5} w={5} />
+              <Icon as={BsArrowRight} h={5} w={5} color="headerText" />
             </Link>
           </Stack>
         </VStack>

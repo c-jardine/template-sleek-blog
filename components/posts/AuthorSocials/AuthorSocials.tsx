@@ -8,12 +8,12 @@ import { SectionSeparator } from '../../core';
 
 const AuthorCard = (props: AuthorProps) => {
   return (
-    <Stack bg="white" w="full" shadow="md" p={8} spacing={8}>
+    <Stack bg="cardBackground" w="full" shadow="md" p={8} spacing={8}>
       <Text
         textTransform="uppercase"
         textAlign="center"
         fontWeight="bold"
-        color="black"
+        color="headerText"
         fontSize="sm"
         lineHeight={0}
       >
@@ -23,10 +23,11 @@ const AuthorCard = (props: AuthorProps) => {
       <HStack spacing={4} justifyContent="center">
         {props.socials.facebook && (
           <Link
+            aria-label="Link to Facebook profile"
             href={props.socials.facebook}
             target="_blank"
             rel="noreferrer"
-            bg="blackAlpha.100"
+            bg="subtleText"
             p={3}
             rounded="full"
             role="group"
@@ -38,10 +39,11 @@ const AuthorCard = (props: AuthorProps) => {
         )}
         {props.socials.twitter && (
           <Link
+            aria-label="Link to Twitter profile"
             href={props.socials.twitter}
             target="_blank"
             rel="noreferrer"
-            bg="blackAlpha.100"
+            bg="subtleText"
             p={3}
             rounded="full"
             role="group"
@@ -53,10 +55,11 @@ const AuthorCard = (props: AuthorProps) => {
         )}
         {props.socials.instagram && (
           <Link
+            aria-label="Link to Instagram profile"
             href={props.socials.instagram}
             target="_blank"
             rel="noreferrer"
-            bg="blackAlpha.100"
+            bg="subtleText"
             p={3}
             rounded="full"
             role="group"
@@ -68,10 +71,11 @@ const AuthorCard = (props: AuthorProps) => {
         )}
         {props.socials.youtube && (
           <Link
+            aria-label="Link to YouTube profile"
             href={props.socials.youtube}
             target="_blank"
             rel="noreferrer"
-            bg="blackAlpha.100"
+            bg="subtleText"
             p={3}
             rounded="full"
             role="group"

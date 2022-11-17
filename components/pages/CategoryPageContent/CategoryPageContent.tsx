@@ -1,4 +1,4 @@
-import { Heading, Stack, VStack } from '@chakra-ui/react';
+import { chakra, Stack, VStack } from '@chakra-ui/react';
 import { PageLayout } from '../../../layouts';
 import { CategoryPageProps } from '../../../types';
 import { Pagination } from '../../core';
@@ -14,10 +14,12 @@ const CategoryPageContent = (props: CategoryPageProps) => {
         maxW="8xl"
         mx="auto"
         justifyContent="center"
-        px={4}
+        px={{ base: 4, '2xl': 0 }}
       >
-        <Stack spacing={16}>
-          <Heading textStyle={['h2', 'gradient']}>{category.label}</Heading>
+        <Stack spacing={10}>
+          <chakra.h1 textStyle="h1">
+            <chakra.span textStyle="gradient">{category.label}</chakra.span>
+          </chakra.h1>
           {posts.length > 0 && <Posts posts={posts} />}
         </Stack>
         <Pagination {...pagination} slug={`/category/${slug}`} />

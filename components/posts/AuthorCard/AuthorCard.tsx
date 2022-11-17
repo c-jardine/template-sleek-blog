@@ -6,12 +6,12 @@ import { SectionSeparator } from '../../core';
 const AuthorCard = (props: AuthorProps) => {
   const { picture, name, bio } = props || {};
   return (
-    <Stack bg="white" w="full" shadow="md" p={8} spacing={8}>
+    <Stack bg="cardBackground" w="full" shadow="md" p={8} spacing={8}>
       <Text
         textTransform="uppercase"
         textAlign="center"
         fontWeight="bold"
-        color="black"
+        color="headerText"
         fontSize="sm"
         lineHeight={0}
       >
@@ -39,9 +39,8 @@ const AuthorCard = (props: AuthorProps) => {
         >
           {name}
         </Text>
-        <Text fontSize="sm" textAlign="center">
-          {bio ||
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti minima recusandae facilis in provident molestiae. Minima amet consectetur elit.'}
+        <Text fontSize="sm" textAlign="center" color="bodyText">
+          {bio}
         </Text>
       </Stack>
     </Stack>
