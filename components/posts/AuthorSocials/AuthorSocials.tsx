@@ -27,7 +27,7 @@ const AuthorCard = (props: AuthorProps) => {
             href={props.socials.facebook}
             target="_blank"
             rel="noreferrer"
-            bg="subtleText"
+            bg="socialBackground"
             p={3}
             rounded="full"
             role="group"
@@ -43,7 +43,7 @@ const AuthorCard = (props: AuthorProps) => {
             href={props.socials.twitter}
             target="_blank"
             rel="noreferrer"
-            bg="subtleText"
+            bg="socialBackground"
             p={3}
             rounded="full"
             role="group"
@@ -59,7 +59,7 @@ const AuthorCard = (props: AuthorProps) => {
             href={props.socials.instagram}
             target="_blank"
             rel="noreferrer"
-            bg="subtleText"
+            bg="socialBackground"
             p={3}
             rounded="full"
             role="group"
@@ -75,7 +75,7 @@ const AuthorCard = (props: AuthorProps) => {
             href={props.socials.youtube}
             target="_blank"
             rel="noreferrer"
-            bg="subtleText"
+            bg="socialBackground"
             p={3}
             rounded="full"
             role="group"

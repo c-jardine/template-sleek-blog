@@ -58,6 +58,7 @@ const darkTheme = extendTheme({
     subtleText: '#6e7275',
     lightButtonHover: 'rgba(0,0,0,0.64)',
     darkButtonHover: 'rgba(0,0,0,0.24)',
+    socialBackground: '#6e7275',
   },
   config: {
     initialColorMode: 'dark',
@@ -77,6 +78,7 @@ const lightTheme = extendTheme({
     subtleText: '#a3a3a3',
     lightButtonHover: 'rgba(255,255,255,0.64)',
     darkButtonHover: 'rgba(255,255,255,0.64)',
+    socialBackground: '#f5f5f5',
   },
   config: {
     initialColorMode: 'light',
