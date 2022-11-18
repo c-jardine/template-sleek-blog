@@ -1,10 +1,6 @@
 import {
-  Box,
   chakra,
-  Container,
   Flex,
-  Grid,
-  GridItem,
   Icon,
   Stack,
   Text,
@@ -27,10 +23,10 @@ const SocialButton = ({
 }) => {
   return (
     <chakra.button
-      bg='whiteAlpha.400'
+      bg="socialBackground"
       rounded={'full'}
-      w={8}
-      h={8}
+      w={10}
+      h={10}
       cursor={'pointer'}
       as={'a'}
       href={href}
@@ -41,7 +37,7 @@ const SocialButton = ({
       _hover={{
         bg: 'brand.500',
       }}
-      color='white'
+      color="white"
     >
       <VisuallyHidden>{label}</VisuallyHidden>
       {children}
@@ -53,11 +49,11 @@ const BrandColumn = () => {
   return (
     <Stack>
       <Flex
-        flexDirection='column'
+        flexDirection="column"
         alignItems={{ base: 'center', lg: 'flex-start' }}
         gap={8}
       >
-        <Icon as={RiFlashlightFill} h={8} w={8} color='brand.500' />
+        <Icon as={RiFlashlightFill} h={8} w={8} color="brand.500" />
 
         <Stack direction={'row'} spacing={6}>
           <SocialButton label={'Twitter'} href={'#'}>
@@ -70,7 +66,7 @@ const BrandColumn = () => {
             <FaInstagram />
           </SocialButton>
         </Stack>
-        <Text color='whiteAlpha.600' fontSize='sm' w='full'>
+        <Text color="whiteAlpha.600" fontSize="sm" w="full">
           Developed by Keplux Development
         </Text>
       </Flex>

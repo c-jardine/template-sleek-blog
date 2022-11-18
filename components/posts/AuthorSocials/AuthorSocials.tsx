@@ -1,4 +1,4 @@
-import { HStack, Link, Stack, Text } from '@chakra-ui/react';
+import { HStack, Icon, Link, Stack, Text } from '@chakra-ui/react';
 import { FaFacebookF } from '@react-icons/all-files/fa/FaFacebookF';
 import { FaInstagram } from '@react-icons/all-files/fa/FaInstagram';
 import { FaTwitter } from '@react-icons/all-files/fa/FaTwitter';
@@ -27,14 +27,18 @@ const AuthorCard = (props: AuthorProps) => {
             href={props.socials.facebook}
             target="_blank"
             rel="noreferrer"
-            bg="socialBackground"
-            p={3}
+            bg="background"
+            w={12}
+            h={12}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             rounded="full"
             role="group"
             transition="200ms ease-in-out"
             _hover={{ bg: 'brand.500' }}
           >
-            <FaFacebookF />
+            <Icon as={FaFacebookF} color="headerText" w={5} h={5} />
           </Link>
         )}
         {props.socials.twitter && (
@@ -43,14 +47,18 @@ const AuthorCard = (props: AuthorProps) => {
             href={props.socials.twitter}
             target="_blank"
             rel="noreferrer"
-            bg="socialBackground"
-            p={3}
+            bg="background"
+            w={12}
+            h={12}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             rounded="full"
             role="group"
             transition="200ms ease-in-out"
             _hover={{ bg: 'brand.500' }}
           >
-            <FaTwitter />
+            <Icon as={FaTwitter} color="headerText" w={5} h={5} />
           </Link>
         )}
         {props.socials.instagram && (
@@ -59,14 +67,18 @@ const AuthorCard = (props: AuthorProps) => {
             href={props.socials.instagram}
             target="_blank"
             rel="noreferrer"
-            bg="socialBackground"
-            p={3}
+            bg="background"
+            w={12}
+            h={12}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             rounded="full"
             role="group"
             transition="200ms ease-in-out"
             _hover={{ bg: 'brand.500' }}
           >
-            <FaInstagram />
+            <Icon as={FaInstagram} color="headerText" w={5} h={5} />
           </Link>
         )}
         {props.socials.youtube && (
@@ -75,14 +87,18 @@ const AuthorCard = (props: AuthorProps) => {
             href={props.socials.youtube}
             target="_blank"
             rel="noreferrer"
-            bg="socialBackground"
-            p={3}
+            bg="background"
+            w={12}
+            h={12}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             rounded="full"
             role="group"
             transition="200ms ease-in-out"
             _hover={{ bg: 'brand.500' }}
           >
-            <FaYoutube />
+            <Icon as={FaYoutube} color="headerText" w={5} h={5} />
           </Link>
         )}
       </HStack>

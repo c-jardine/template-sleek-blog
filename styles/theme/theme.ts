@@ -11,7 +11,6 @@ const colors = {
 const textStyles = {
   h1: {
     fontSize: '5xl',
-    color: 'chalkboard',
     fontWeight: 'bold',
     lineHeight: 1,
   },
@@ -51,14 +50,14 @@ const darkTheme = extendTheme({
   components,
   colors: {
     ...colors,
-    background: '#363636',
-    cardBackground: '#222222',
+    background: '#18191d',
+    cardBackground: '#141518',
     headerText: '#c9d1d9',
     bodyText: '#949a9f',
     subtleText: '#6e7275',
     lightButtonHover: 'rgba(0,0,0,0.64)',
     darkButtonHover: 'rgba(0,0,0,0.24)',
-    socialBackground: '#6e7275',
+    socialBackground: '#141518',
   },
   config: {
     initialColorMode: 'dark',
@@ -78,7 +77,7 @@ const lightTheme = extendTheme({
     subtleText: '#a3a3a3',
     lightButtonHover: 'rgba(255,255,255,0.64)',
     darkButtonHover: 'rgba(255,255,255,0.64)',
-    socialBackground: '#f5f5f5',
+    socialBackground: '#141518',
   },
   config: {
     initialColorMode: 'light',

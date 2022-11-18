@@ -33,9 +33,9 @@ const PostPageContent = (props: PostPageProps) => {
           <Grid
             templateColumns={{ base: '1fr', lg: '1fr 1fr 1fr' }}
             maxW="6xl"
-            gap={8}
-            w="full"
             mx="auto"
+            w="full"
+            gap={8}
           >
             <GridItem
               colSpan={{ base: 1, lg: 2 }}
@@ -64,6 +64,14 @@ const PostPageContent = (props: PostPageProps) => {
               <CategoryPostsCard data={categories} />
             </GridItem>
           </Grid>
+
+          <Box
+            maxW="66%"
+            w="full"
+            alignSelf="flex-start"
+            bgGradient="linear(to-r, purple.700, brand.400)"
+            style={{ height: 1 }}
+          />
 
           <Stack spacing={10} maxW="8xl" mx="auto">
             <chakra.h2 textStyle="h1">
