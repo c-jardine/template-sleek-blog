@@ -98,7 +98,7 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
     <Link
       href={path}
       lineHeight="inherit"
-      color="bodyText"
+      color={name === 'Blog' ? 'brand.500' : 'bodyText'}
       _hover={{
         color: 'brand.500',
       }}
