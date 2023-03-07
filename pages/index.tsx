@@ -58,7 +58,7 @@ const HomePage = (props: HomePageProps) => {
           justifyContent="center"
         >
           <Carousel>
-            {featuredPosts.posts.map((post, index) => (
+            {featuredPosts?.posts.map((post, index) => (
               <FeaturedCard
                 key={index}
                 {...post}
@@ -67,27 +67,33 @@ const HomePage = (props: HomePageProps) => {
             ))}
           </Carousel>
 
-          <Stack spacing={10} maxW="8xl" mx="auto" px={{ base: 4, '2xl': 0 }}>
+          <Stack spacing={10} maxW="8xl" w='full' mx="auto" px={{ base: 4, '2xl': 0 }}>
             <chakra.h2 textStyle="h1">
               <chakra.span textStyle="gradient">Recent posts</chakra.span>
             </chakra.h2>
-            {recentPosts.length > 0 && <Posts posts={recentPosts} />}
-            <Link
-              aria-label="View all blog posts"
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              gap={2}
-              w="fit-content"
-              mt={{ base: 16 }}
-              role="group"
-              href="/posts"
-            >
-              <Text textStyle="link" variant="upperWide" color="headerText">
-                View all posts
-              </Text>
-              <Icon as={BsArrowRight} h={5} w={5} color="headerText" />
-            </Link>
+            {recentPosts.length > 0 ? (
+              <>
+                <Posts posts={recentPosts} />
+                <Link
+                  aria-label="View all blog posts"
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  gap={2}
+                  w="fit-content"
+                  mt={{ base: 16 }}
+                  role="group"
+                  href="/posts"
+                >
+                  <Text textStyle="link" variant="upperWide" color="headerText">
+                    View all posts
+                  </Text>
+                  <Icon as={BsArrowRight} h={5} w={5} color="headerText" />
+                </Link>
+              </>
+            ) : (
+              <Text>No posts found.</Text>
+            )}
           </Stack>
         </VStack>
       </PageLayout>
@@ -103,14 +109,15 @@ export async function getStaticProps({
     // Get the home page data.
     const data = await getClient(preview).fetch(homePageQuery, {
       slug: '',
-      start: 1,
+      start: 0,
       end: 4,
     });
 
+    console.log(data);
+
     return {
       props: { ...data, preview },
-      // If webhooks isn't setup then attempt to re-generate in 1 minute intervals
-      revalidate: process.env.SANITY_REVALIDATE_SECRET ? undefined : 60,
+      revalidate: 10,
     };
   }
 }

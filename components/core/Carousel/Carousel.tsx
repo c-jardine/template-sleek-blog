@@ -33,7 +33,7 @@ const Carousel = (props) => {
         modules={[Pagination]}
         className="swiper"
       >
-        {props.children.map((child, index) => (
+        {props.children?.map((child, index) => (
           <SwiperSlide key={index} className="swiperSlide">
             {child}
           </SwiperSlide>
