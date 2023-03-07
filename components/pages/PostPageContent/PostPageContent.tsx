@@ -56,11 +56,13 @@ const PostPageContent = (props: PostPageProps) => {
             </GridItem>
             <GridItem as={Stack} spacing={16}>
               <AuthorCard {...post.author} />
-              <AuthorSocials {...post.author} />
-              <PostsByAuthorCard
-                posts={props.postsByAuthor}
-                author={post.author.name}
-              />
+              {post.author.socials && <AuthorSocials {...post.author} />}
+              {props.postsByAuthor.length && (
+                <PostsByAuthorCard
+                  posts={props.postsByAuthor}
+                  author={post.author.name}
+                />
+              )}
               <CategoryPostsCard data={categories} />
             </GridItem>
           </Grid>
@@ -73,27 +75,37 @@ const PostPageContent = (props: PostPageProps) => {
             style={{ height: 1 }}
           />
 
-          <Stack spacing={10} maxW="8xl" mx="auto">
+          <Stack spacing={10} maxW="8xl" w="full" mx="auto">
             <chakra.h2 textStyle="h1">
               <chakra.span textStyle="gradient">Recent posts</chakra.span>
             </chakra.h2>
-            <Box>{recentPosts.length > 0 && <Posts posts={recentPosts} />}</Box>
-            <Link
-              aria-label="View all recent posts"
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              gap={2}
-              w="fit-content"
-              mt={{ base: 16 }}
-              role="group"
-              href="/posts"
-            >
-              <Text textStyle="link" variant="upperWide" color="headerText">
-                View all posts
-              </Text>
-              <Icon as={BsArrowRight} h={5} w={5} color="headerText" />
-            </Link>
+            <Box>
+              {recentPosts.length > 0 ? (
+                <>
+                  <Posts posts={recentPosts} />
+                  <Link
+                    aria-label="View all recent posts"
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    gap={2}
+                    w="fit-content"
+                    mt={{ base: 16 }}
+                    role="group"
+                    href="/posts"
+                  >
+                    <Text
+                      textStyle="link"
+                      variant="upperWide"
+                      color="headerText"
+                    >
+                      View all posts
+                    </Text>
+                    <Icon as={BsArrowRight} h={5} w={5} color="headerText" />
+                  </Link>
+                </>
+              ) : <Text>No posts found.</Text>}
+            </Box>
           </Stack>
         </VStack>
       </Box>
