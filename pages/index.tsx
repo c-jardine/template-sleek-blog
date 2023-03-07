@@ -110,10 +110,8 @@ export async function getStaticProps({
     const data = await getClient(preview).fetch(homePageQuery, {
       slug: '',
       start: 0,
-      end: 4,
+      end: 3,
     });
-
-    console.log(data);
 
     return {
       props: { ...data, preview },
