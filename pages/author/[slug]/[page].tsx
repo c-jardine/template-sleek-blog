@@ -107,7 +107,6 @@ export const getStaticProps = async ({
       start,
       end,
     });
-  console.log(categories);
 
   const totalPages = Math.ceil(totalPosts / RESULTS_PER_PAGE);
 

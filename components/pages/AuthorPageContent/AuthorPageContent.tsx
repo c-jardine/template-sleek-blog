@@ -42,7 +42,7 @@ const AuthorPageContent = (props: AuthorPageProps) => {
             {author && (
               <>
                 <AuthorCard {...author} />
-                <AuthorSocials {...author} />
+                {author.socials && <AuthorSocials {...author} />}
                 <CategoryPostsCard data={categories} />
               </>
             )}
